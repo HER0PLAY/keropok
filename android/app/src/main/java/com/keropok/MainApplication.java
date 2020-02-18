@@ -7,13 +7,14 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.guichaguri.trackplayer.TrackPlayer;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends Application implements ReactApplication {  
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+            new TrackPlayer();
             new SplashScreenReactPackage();
           return packages;
         }
@@ -53,7 +55,7 @@ public class MainApplication extends Application implements ReactApplication {
   /**
    * Loads Flipper in React Native templates.
    *
-   * @param context
+   * @param
    */
   private static void initializeFlipper(Context context) {
     if (BuildConfig.DEBUG) {
