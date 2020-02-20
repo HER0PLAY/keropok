@@ -1,54 +1,44 @@
-// import React from 'react';
-// import { View, Text, Button } from 'react-native';
-
-// export default class Login extends React.Component {
-//    static navigationOptions = {
-//     title: 'Setting',
-//     tabBarOptions: {
-//       activeBackgroundColor: 'gary',
-//       inactiveBackgroundColor: 'white',
-//       activeTintColor: '#000000',
-//       labelStyle: {
-//         fontSize: '200%',
-//       },
-//     },
-//   };
-//   render() {
-//     return (
-//       <View style={{ padding: '20%' }}>
-//         <View>
-//           <View style={{ margin: '25%' }} />
-//           <Button
-//             onPress={() => this.props.navigation.navigate('Login')}
-//             title="Sign out"
-//             color="red"
-//           />
-//         </View>
-//       </View>
-//     );
-//   }
-// }
-
-
-
-
 import React from 'react';
-import { View, Text, Button, StatusBar, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, Button, StatusBar, TouchableOpacity, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
 import SplashScreen from 'react-native-splash-screen'
-import GlobalFont from 'react-native-global-font'
 
 import Utils from "../utils/index"
 import Config from "../config/index"
 import Component from "../components/index"
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
 
 export default class extends React.Component {
-  componentDidMount() {
-    let fontName = 'Avenir_Heavy'
-    GlobalFont.applyGlobal(Avenir_Heavy)
-  }
+
+  constructor(props) {
+    super(props);
+}
+
+componentDidMount() {
+    fetch('https://dev.3rddigital.com/keropok/api/audio', {
+        method: 'POST',
+        headers: {
+          AuthorizationUser:'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
+        },
+        
+      
+      }).then(response => response.json())
+        .then(responseJson => {
+          this.setState(
+            {
+              isLoading: true,
+              dataSource: responseJson.data,
+            },
+            function() {}
+          );
+  
+          alert(JSON.stringify(responseJson))
+        })
+        .catch(error => {
+          console.error(error);
+        });
+}
+
   render() {
     return (
       <View style={styles.MainView}>
@@ -190,7 +180,23 @@ export default class extends React.Component {
           </ScrollView>
         </View>
         <Text style={styles.TitlePopular}> Popular Bites</Text>
-          <Component.K_Audio />
+        <Component.K_Audio />
+  
+
+
+        {/* <View style={{ flex: 1, paddingTop: 20 }}>
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={({ item }) => (
+              <Text>
+                {item.duration}, {item.audio}
+              </Text>
+            )}
+            keyExtractor={({ audio_id }, index) => audio_id}
+          />
+        </View> */}
+
+
         <Text style={styles.TitleAll}> All Bites</Text>
       </View>
     );
@@ -256,6 +262,15 @@ const styles = StyleSheet.create({
     fontSize: Utils.MethodUtils.increaseSize(17),
     fontFamily: Config.Constant.FONT_AVE_HEAVY,
     paddingHorizontal: 20,
-    paddingVertical:15,
-  }
+    paddingVertical: 15,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
 })  

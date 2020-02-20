@@ -1,14 +1,43 @@
 import React from 'react';
 import { StyleSheet, View, Text, StatusBar, Image, TouchableOpacity, PixelRatio, Dimensions } from 'react-native';
+import TrackPlayer from 'react-native-track-player';
 
 import Config from "../config/index"
 import Utils from "../utils/index"
 
+TrackPlayer.setupPlayer().then(() => {
+});
+
 export default class Audio extends React.Component {
-    constructor(props){
+
+    constructor(props) {
         super(props);
-        this.state ={ isLoading: true}
-      }
+    }
+
+    // componentDidMount() {
+    //     fetch('https://dev.3rddigital.com/keropok/api/audio', {
+    //         method: 'POST',
+    //         headers: {
+    //           AuthorizationUser:'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
+    //         },
+            
+          
+    //       }).then(response => response.json())
+    //         .then(responseJson => {
+    //           this.setState(
+    //             {
+    //               isLoading: false,
+    //               dataSource: responseJson.data,
+    //             },
+    //             function() {}
+    //           );
+      
+    //           alert(JSON.stringify(responseJson))
+    //         })
+    //         .catch(error => {
+    //           console.error(error);
+    //         });
+    // }
     render() {
         return (
             <View style={styles.component}>
@@ -38,10 +67,10 @@ export default class Audio extends React.Component {
 
                 <View style={styles.Song}>
                     <View style={styles.SongTitle}>
-                        <Text style={styles.titleTxt} />
+                        <Text style={styles.titleTxt}>HUH! YOU DID WHAT </Text>
                     </View>
                     <View style={styles.SongDuration}>
-                        <Text style={styles.DurationTxt} />
+                        <Text style={styles.DurationTxt}>00:02 </Text>
                     </View>
                 </View>
 
@@ -92,11 +121,35 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
     },
     Song: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         height: '100%',
         width: '80%',
         justifyContent: "center",
         alignItems: 'center',
+    },
+    SongTitle: {
+        paddingTop: 9,
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        height: '50%',
+        width: '80%',
+    },
+    SongDuration: {
+        paddingBottom: 9,
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        height: '50%',
+        width: '80%',
+    },
+    titleTxt: {
+        color: Config.Constant.COLOR_SONG_TXT,
+        fontFamily: Config.Constant.FONT_AVE_HEAVY,
+        fontSize: Utils.MethodUtils.increaseSize(18),
+    },
+    DurationTxt: {
+        color: Config.Constant.COLOR_SBAR_TXT,
+        fontFamily: Config.Constant.FONT_AVE_MEDIUM,
+        fontSize: Utils.MethodUtils.increaseSize(14),
     },
     Share: {
         height: '100%',

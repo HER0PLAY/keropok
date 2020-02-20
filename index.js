@@ -3,6 +3,7 @@
  */
 
 import SplashScreen from 'react-native-splash-screen'
+import TrackPlayer from 'react-native-track-player';
 import {AppRegistry} from 'react-native';
 // import App from './App';
 // import App from './src/screens/HomeTemp';
@@ -12,3 +13,4 @@ import {name as appName} from './app.json';
 import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 
 AppRegistry.registerComponent(appName, () => gestureHandlerRootHOC(App));
+TrackPlayer.registerPlaybackService(() => require('./service.js'));
