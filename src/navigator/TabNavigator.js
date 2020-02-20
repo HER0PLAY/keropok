@@ -23,22 +23,62 @@ export default class HelloWorldApp extends Component {
 
 
 
+// import { createAppContainer } from 'react-navigation';
+// import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+// import HomePage from '../screens/Homescreen';
+// import Libraryscreen from '../screens/Libraryscreen';
+
+// const TabNavigator = createBottomTabNavigator({
+//   Home:{ screen: HomePage},
+//   Library: { screen: Libraryscreen },
+// });
+
+// export default createAppContainer(TabNavigator);
+
+
+
+
+
+
+
+
+
+import React from 'react';
+import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomePage from '../screens/Homescreen';
 import Libraryscreen from '../screens/Libraryscreen';
 
+// class HomePage extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//         <Text>Home!</Text>
+//       </View>
+//     );
+//   }
+// }
+
+// class Libraryscreen extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//         <Text>Library!</Text>
+//       </View>
+//     );
+//   }
+// }
+
 const TabNavigator = createBottomTabNavigator({
-  Home:{ screen: HomePage},
-  Library: { screen: Libraryscreen },
+  Home: HomePage,
+  Library: Libraryscreen,
 });
 
+
 export default createAppContainer(TabNavigator);
-
-
-
-
 
 
 

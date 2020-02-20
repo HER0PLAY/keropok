@@ -1,22 +1,22 @@
-/* import React from 'react';
+import React from 'react';
 import SplashScreen from 'react-native-splash-screen'
 
 import TabNavigator from "./src/navigator/TabNavigator"
-import MainNavigator from "./src/navigator/MainNavigator"
-import Components from "./src/components/index"
 
-export default class App extends React.Component  {
-  render(){
-  return(
-    <Components style={{ flex: 1 }}>
-        <TabNavigator/>
-        <MainNavigator />
-      </Components>
-  )}
+export default class App extends React.Component {
   componentDidMount() {
-      SplashScreen.hide();
+    SplashScreen.hide();
   }
-} */
+  render() {
+    return (
+      <TabNavigator />
+    )
+  }
+}
+
+
+
+
 
 // import React from 'react';
 // import SplashScreen from 'react-native-splash-screen'
@@ -60,37 +60,36 @@ export default class App extends React.Component  {
 
 
 
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+// import React from 'react';
+// import { Text, View } from 'react-native';
+// import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
-      </View>
-    );
-  }
-}
+// class HomeScreen extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//         <Text>Home!</Text>
+//       </View>
+//     );
+//   }
+// }
 
-class SettingsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>  
-      </View>
-    );
-  }
-}
+// class SettingsScreen extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//         <Text>Settings!</Text>  
+//       </View>
+//     );
+//   }
+// }
 
-const TabNavigator = createBottomTabNavigator({
-  Home: { screen: HomeScreen },
-  Settings: { screen: SettingsScreen },
-});
+// const TabNavigator = createBottomTabNavigator({
+//   Home: { screen: HomeScreen },
+//   Settings: { screen: SettingsScreen },
+// });
 
-export default createAppContainer(TabNavigator);
-
+// export default createAppContainer(TabNavigator);
 
 
 

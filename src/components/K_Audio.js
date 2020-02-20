@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, StatusBar, Image, TouchableOpacity, PixelRatio, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, Image, TouchableOpacity, PixelRatio, Dimensions, FlatList } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 
 import Config from "../config/index"
@@ -14,30 +14,29 @@ export default class Audio extends React.Component {
         super(props);
     }
 
-    // componentDidMount() {
-    //     fetch('https://dev.3rddigital.com/keropok/api/audio', {
-    //         method: 'POST',
-    //         headers: {
-    //           AuthorizationUser:'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
-    //         },
-            
-          
-    //       }).then(response => response.json())
-    //         .then(responseJson => {
-    //           this.setState(
-    //             {
-    //               isLoading: false,
-    //               dataSource: responseJson.data,
-    //             },
-    //             function() {}
-    //           );
-      
-    //           alert(JSON.stringify(responseJson))
-    //         })
-    //         .catch(error => {
-    //           console.error(error);
-    //         });
-    // }
+    componentDidMount() {
+        fetch('https://dev.3rddigital.com/keropok/api/audio', {
+            method: 'POST',
+            headers: {
+                AuthorizationUser: 'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
+            },
+
+
+        }).then(response => response.json())
+            .then(responseJson => {
+                this.setState(
+                    {
+                        isLoading: false,
+                        dataSource: responseJson.data,
+                    },
+                    function () { }
+                );
+                //alert(JSON.stringify(responseJson))
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
     render() {
         return (
             <View style={styles.component}>
@@ -64,16 +63,27 @@ export default class Audio extends React.Component {
                     </TouchableOpacity>
                 </View>
 
+                <FlatList
+                    renderItem={({ item, index }) => (
 
-                <View style={styles.Song}>
-                    <View style={styles.SongTitle}>
-                        <Text style={styles.titleTxt}>HUH! YOU DID WHAT </Text>
-                    </View>
-                    <View style={styles.SongDuration}>
-                        <Text style={styles.DurationTxt}>00:02 </Text>
-                    </View>
-                </View>
+                        <View style={styles.Song}>
+                            <View style={styles.SongTitle}>
+                                <Text style={styles.titleTxt}>
+                                    {/* HUH! YOU DID WHAT */}
+                                    {item.Audio}
+                                </Text>
+                            </View>
+                            
+                            <View style={styles.SongDuration}>
+                                <Text style={styles.DurationTxt}>
+                                    {/* 00:02 */}
+                                    {item.duration}
+                                </Text>
+                            </View>
+                        </View>
 
+                    )}
+                />
 
                 <View style={styles.Share}>
                     <TouchableOpacity
@@ -129,14 +139,14 @@ const styles = StyleSheet.create({
     },
     SongTitle: {
         paddingTop: 9,
-        backgroundColor: "#fff",
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
         justifyContent: "center",
         height: '50%',
         width: '80%',
     },
     SongDuration: {
         paddingBottom: 9,
-        backgroundColor: "#fff",
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
         justifyContent: "center",
         height: '50%',
         width: '80%',
