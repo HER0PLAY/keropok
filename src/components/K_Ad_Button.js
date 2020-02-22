@@ -41,7 +41,7 @@ export default class MCButton extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-      borderRadius: Utils.MethodUtils.isTablet() ? 10 : 5,
+      borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.4,
       shadowRadius: 4,

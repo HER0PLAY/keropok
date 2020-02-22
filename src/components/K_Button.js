@@ -43,11 +43,11 @@ export default class KButton extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: Utils.MethodUtils.isTablet() ? 10 : 5,
+        borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.9,
         shadowRadius: 9,
-        elevation: 5,
+        elevation: 4,
     },
 
 })

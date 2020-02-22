@@ -63,27 +63,27 @@ export default class Audio extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                <FlatList
-                    renderItem={({ item, index }) => (
+                {/* <FlatList
+                    renderItem={({ item, index }) => ( */}
 
                         <View style={styles.Song}>
                             <View style={styles.SongTitle}>
                                 <Text style={styles.titleTxt}>
-                                    {/* HUH! YOU DID WHAT */}
-                                    {item.Audio}
+                                    HUH! YOU DID WHAT
+                                    {/* {item.Audio} */}
                                 </Text>
                             </View>
                             
                             <View style={styles.SongDuration}>
                                 <Text style={styles.DurationTxt}>
-                                    {/* 00:02 */}
-                                    {item.duration}
+                                    00:02
+                                    {/* {item.duration} */}
                                 </Text>
                             </View>
                         </View>
 
-                    )}
-                />
+                     {/* )}
+                 /> */}
 
                 <View style={styles.Share}>
                     <TouchableOpacity

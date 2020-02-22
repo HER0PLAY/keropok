@@ -10,6 +10,9 @@ const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ?
 
 export default class Home extends React.Component {
   static navigationOptions = {
+    tabBarOptions: {
+      activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
+    },
     tabBarIcon: (focused, tintColor) => (
       <Image style={{ }} 
              source={require('../assets/images/home-Active.imageset/home-Active.png')} />

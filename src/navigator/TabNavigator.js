@@ -1,76 +1,8 @@
-/* 
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-
-export default class HelloWorldApp extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello, world!</Text>
-      </View>
-    );
-  }
-  componentDidMount() {
-    SplashScreen.hide();
-}}
-*/
-
-
-
-
-
-
-
-
-
-// import { createAppContainer } from 'react-navigation';
-// import { createBottomTabNavigator } from 'react-navigation-tabs';
-
-// import HomePage from '../screens/Homescreen';
-// import Libraryscreen from '../screens/Libraryscreen';
-
-// const TabNavigator = createBottomTabNavigator({
-//   Home:{ screen: HomePage},
-//   Library: { screen: Libraryscreen },
-// });
-
-// export default createAppContainer(TabNavigator);
-
-
-
-
-
-
-
-
-
-import React from 'react';
-import { Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomePage from '../screens/Homescreen';
 import Libraryscreen from '../screens/Libraryscreen';
-
-// class HomePage extends React.Component {
-//   render() {
-//     return (
-//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//         <Text>Home!</Text>
-//       </View>
-//     );
-//   }
-// }
-
-// class Libraryscreen extends React.Component {
-//   render() {
-//     return (
-//       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//         <Text>Library!</Text>
-//       </View>
-//     );
-//   }
-// }
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomePage,
@@ -90,44 +22,97 @@ export default createAppContainer(TabNavigator);
 
 
 // import * as React from 'react';
-// import { Text, View } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { Text, View, Image } from 'react-native';
+// import { NavigationContainer } from 'react-navigation';
+// import { createBottomTabNavigator } from 'react-navigation-tabs';
+// import { MaterialCommunityIcons } from 'react-native-vector-icons';
 
-// function HomeScreen() {
+// import Home from "../screens/Homescreen"
+// import Library from "../screens/Libraryscreen"
+
+// function Homescreen() {
 //   return (
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <Text>Home!</Text>
-//     </View>
-//   );
+//     <Home />
+//   )
+// }
+// function Libraryscreen() {
+//   return (
+//     <Library />
+//   )
 // }
 
-// function SettingsScreen() {
-//   return (
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <Text>Settings!</Text>
-//     </View>
-//   );
-// }
+// const Tab = createBottomTabNavigator(
 
-// const Tab = createBottomTabNavigator();
+// function MyTabs() {
+//   return (
+//     <Tab.Navigator
+//       initialRouteName="Homescreen"
+//       tabOptions={{
+//         activeTintColor: '#e91e63',
+//       }}
+//     >
+//       <Tab.Screen
+//         name="Homescreen"
+//         component={Homescreen}
+//         options={{
+//           tabBarLabel: 'Home',
+//            tabBarIcon: ({ color, size }) => (
+//              <MaterialCommunityIcons name="home" color={color} size={size} />
+//           // <Image style={{}}
+//           //   source={require('../assets/images/home-Active.imageset/home-Active.png')} />
+//            )
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Libraryscreen"
+//         component={Libraryscreen}
+//         options={{
+//           tabBarLabel: 'Library',
+//            tabBarIcon: ({ color, size }) => (
+//              <MaterialCommunityIcons name="bell" color={color} size={size} />
+//           // <Image style={{}}
+//           //   source={require('../assets/images/audio-inactive.imageset/audio-inactive.png')} />
+//            )
+//         }}
+//       />
+//     </Tab.Navigator>
+//   );
+// });
 
 // export default function App() {
 //   return (
 //     <NavigationContainer>
-//       <Tab.Navigator>
-//         <Tab.Screen name="Home" component={HomeScreen} />
-//         <Tab.Screen name="Settings" component={SettingsScreen} />
-//       </Tab.Navigator>
+//       <MyTabs/>
 //     </NavigationContainer>
 //   );
 // }
 
-// import TabNavigator from 'react-native-tab-navigator';
 
 
 
-/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 <TabNavigator>
   <TabNavigator.Item
     selected={this.state.selectedTab === 'HomeScreen'}
