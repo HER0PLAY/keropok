@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomePage from '../screens/Homescreen';
 import Libraryscreen from '../screens/Libraryscreen';
-
+  
 const TabNavigator = createBottomTabNavigator({
   Home: HomePage,
   Library: Libraryscreen,
@@ -11,6 +11,28 @@ const TabNavigator = createBottomTabNavigator({
 
 
 export default createAppContainer(TabNavigator);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

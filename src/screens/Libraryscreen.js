@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Button, StatusBar, TouchableOpacity, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
-import { NavigationContainer } from 'react-navigation';
 
 import Utils from "../utils/index"
 import Config from "../config/index"
@@ -16,10 +15,10 @@ export default class Library extends React.Component {
 
   componentDidMount() {
     // SplashScreen.hide();
-    fetch('https://dev.3rddigital.com/keropok/api/audio', {
+    fetch('https://dev.3rddigital.com/keropok/api/cms', {
       method: 'POST',
       headers: {
-        AuthorizationUser: 'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
+        type: 'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
       },
 
 
@@ -33,7 +32,7 @@ export default class Library extends React.Component {
           function () { }
         );
 
-       // alert(JSON.stringify(responseJson))
+        // alert(JSON.stringify(responseJson))
       })
       .catch(error => {
         console.error(error);
@@ -43,17 +42,23 @@ export default class Library extends React.Component {
   static navigationOptions = {
     tabBarOptions: {
       activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
-      tintColor: Config.Constant.COLOR_BACKGROUND_ADs
+      inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
+      labelStyle: {
+        fontSize: 13,
+      },
+      tabStyle: {
+        height: 50,
+      },
     },
-    tabBarIcon: (focused, tintColor) => (
-      <Image style={{ }} 
-             source={require('../assets/images/audio-inactive.imageset/audio-inactive.png')} />
+    tabBarIcon: ({tintColor}) => (
+      <Image style={{ tintColor: tintColor, height: '83%', width:'15%' }}
+        source={require('../assets/images/audio-inactive.imageset/audio-inactive.png')} />
     )
   };
 
 
 
-  
+
   render() {
     return (
       <View style={styles.MainView}>
@@ -209,7 +214,7 @@ export default class Library extends React.Component {
       </View>
     );
   }
- 
+
 }
 
 const styles = StyleSheet.create({

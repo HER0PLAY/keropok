@@ -1,7 +1,7 @@
 import React from 'react';
 import SplashScreen from 'react-native-splash-screen'
 
-import TabNavigator from "./src/navigator/TabNavigator"
+import StackNavigator from "./src/navigator/StackNavigator"
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -9,7 +9,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <TabNavigator />
+      <StackNavigator />
     )
   }
 }

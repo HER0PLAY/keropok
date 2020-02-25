@@ -5,6 +5,7 @@ import Utils from "../utils/index"
 import Config from "../config/index"
 import Component from "../components/index"
 
+
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
 
 
@@ -12,10 +13,17 @@ export default class Home extends React.Component {
   static navigationOptions = {
     tabBarOptions: {
       activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
+      inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
+      labelStyle: {
+        fontSize: 13,
+      },
+      tabStyle: {
+        height: 50,
+      },
     },
-    tabBarIcon: (focused, tintColor) => (
-      <Image style={{ }} 
-             source={require('../assets/images/home-Active.imageset/home-Active.png')} />
+    tabBarIcon: ({ tintColor }) => (
+      <Image style={{ tintColor: tintColor, height: 25, width:25 }}
+        source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
     )
   };
   render() {
@@ -67,6 +75,7 @@ export default class Home extends React.Component {
             btnText={Config.String.ABOUT}
             btnTextPadding={Utils.MethodUtils.increaseSize(12)}
             btnTextSize={Utils.MethodUtils.increaseSize(17)}
+            onPress={() => this.props.navigation.navigate("About")}
             style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
           />
 

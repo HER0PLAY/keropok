@@ -3,6 +3,7 @@ import { Dimensions } from 'react-native';
 export default Constant = {
 
     COLOR_BACKGROUND: "#FFFFFF",
+    COLOR_INACTIVE_TINTCOLOR: "#737373",
     COLOR_SHADOW: "#797575",
     COLOR_BTN_TEXT: "#F96A67",
     COLOR_TEXT_AD: "#FFFFFF",
