@@ -5,6 +5,7 @@ import HomePage from '../screens/Homescreen';
 import Libraryscreen from '../screens/Libraryscreen';
 
 import StackNavigator from './StackNavigator'
+import TabStackNavigator from './TabStackNav'
   
 const TabNavigator = createBottomTabNavigator({
   Home: StackNavigator,

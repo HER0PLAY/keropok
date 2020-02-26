@@ -3,6 +3,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    View,
 } from 'react-native';
 
 import Config from "../config/index"
@@ -18,6 +19,7 @@ export default class KButton extends React.Component {
         const btnTextPadding = this.props.btnTextPadding ? this.props.btnTextPadding : Utils.MethodUtils.increaseSize(8)
 
         return (
+           // <View style= {{paddingVertical: 10}}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 style={[styles.container, {
@@ -35,6 +37,7 @@ export default class KButton extends React.Component {
                     fontFamily: Config.Constant.FONT_AVE_HEAVY
                 }}>{this.props.btnText}</Text>
             </TouchableOpacity>
+         //   </View>
         )
     }
 }
@@ -43,8 +46,8 @@ export default class KButton extends React.Component {
 const styles = StyleSheet.create({
     container: {
         borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 2,
+        shadowOffset: { width: 0, height: 0 },
+        marginTop: 5,
         shadowRadius: 9,
         elevation: 4,
     },

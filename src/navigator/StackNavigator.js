@@ -6,7 +6,7 @@ import TabNavigator from "./TabNavigator"
 import KW_About_Keropok from "../components/WebView/KW_About_Keropok"
 import Homescreen from "../screens/Homescreen"
 
-import {Image } from 'react-native';
+import { Image } from 'react-native';
 
 import Utils from "../utils/index"
 import Config from "../config/index"
@@ -43,14 +43,14 @@ const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ?
 class Home extends React.Component {
     render() {
         return (
-            <Homescreen props={this.props}/>
+            <Homescreen props={this.props} />
         );
     }
 }
 class About extends React.Component {
     render() {
         return (
-            <WebView.KW_About_Keropok />
+            <WebView.KW_About_Keropok props={this.props} />
         );
     }
 }
@@ -81,8 +81,27 @@ const RootStack = createStackNavigator(
     { headerMode: 'none' },
     {
         initialRouteName: Home,
-    }
+    },
+
 );
+
+RootStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible;
+    if (navigation.state.routes.length > 1) {
+        navigation.state.routs.map(route => {
+            if (route.routeName === "AboutKeropok") {
+                tabBarVisible = false;
+            } else {
+                tabBarVisible = true;
+            }
+        });
+    }
+    return {
+        tabBarVisible
+    };
+};
+
+
 
 // function App() {
 //     return (
@@ -102,20 +121,21 @@ const AppContainer = createAppContainer(RootStack);
 export default class App extends React.Component {
     static navigationOptions = {
         tabBarOptions: {
-          activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
-          inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
-          labelStyle: {
-            fontSize: 13,
-          },
-          tabStyle: {
-            height: 50,
-          },
+            tabBarVisible: false,
+            activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
+            inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
+            labelStyle: {
+                fontSize: 13,
+            },
+            tabStyle: {
+                height: 50,
+            },
         },
         tabBarIcon: ({ tintColor }) => (
-          <Image style={{ tintColor: tintColor, height: 25, width: 25 }}
-            source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
+            <Image style={{ tintColor: tintColor, height: 25, width: 25 }}
+                source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
         )
-      };
+    };
     render() {
         return <AppContainer />;
     }

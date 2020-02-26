@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     borderColor: '#EBEBEB',
     borderWidth: 1.5,
     alignSelf: 'center',
-    marginHorizontal: 3 
+    marginHorizontal: 3,
   },
   TagTxt: {
     marginHorizontal: 10,

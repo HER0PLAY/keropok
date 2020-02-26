@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StatusBar, TouchableOpacity, StyleSheet, Image, ScrollView, TouchableNativeFeedback } from 'react-native';
 import { WebView } from 'react-native-webview';
-
+import HTMLView from 'react-native-htmlview';
 
 import Utils from "../../utils/index"
 import Config from "../../config/index"
@@ -10,6 +10,9 @@ const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ?
 
 export default class KW_About_Keropok extends React.Component {
 
+  constructor(props) {
+    super(props)
+  }
   componentDidMount() {
     // SplashScreen.hide();
     fetch('https://dev.3rddigital.com/keropok/api/cms', {
@@ -36,6 +39,8 @@ export default class KW_About_Keropok extends React.Component {
   }
 
   render() {
+    const htmlContent = "<p>I am keropok, a crunchy, tasty snack.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Everybody loves me, if you don&#39;t love me, you probably haven&#39;t tried me yet.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Good things must share with family and friends. I will say hi to them for you.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thank you!</p>";
+
     return (
       <View style={styles.mainView}>
 
@@ -43,7 +48,8 @@ export default class KW_About_Keropok extends React.Component {
           <TouchableNativeFeedback
             style={styles.closeTouchableFeedback}
             background={TouchableNativeFeedback.Ripple('#b1b1b1', true)}
-            onPress={() => this.props.navigation.pop()}  >
+            onPress={() => this.props.props.navigation.pop()}
+          >
             <View style={styles.closeTouchable}>
               <Image style={styles.closeImg}
                 source={require("../../assets/images/Close.imageset/Close.png")} />
@@ -61,6 +67,11 @@ export default class KW_About_Keropok extends React.Component {
           source={{ uri: 'https://reactnative.dev/' }}
           style={{ marginTop: 20 }} />
 
+        {/* <HTMLView
+          value={htmlContent}
+          stylesheet={styles.webView}
+        /> */}
+
         <View style={styles.footer}>
           <Text style={styles.footerTXT}>
             © terms and conditions ( Ver 1.0.3 )
@@ -76,7 +87,7 @@ const styles = StyleSheet.create({
   mainView: {
     height: '100%',
     width: "100%",
-    backgroundColor: '#FDFDFD',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     paddingHorizontal: '2%'
   },
@@ -107,8 +118,12 @@ const styles = StyleSheet.create({
     fontFamily: Config.Constant.FONT_AVE_HEAVY
   },
   webView: {
-    height: '84%',
-    backgroundColor: '#EFEFEF',
+    height: '80%',
+    width: '100%',
+    backgroundColor: '#F1F',
+    fontSize: 15,
+    color: "#000",
+    fontWeight: '100',
   },
   footer: {
     height: '5%',

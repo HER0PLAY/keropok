@@ -8,7 +8,7 @@ import Component from "../components/index"
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
 
 
-export default class Home extends React.Component {
+export default class Homescreen extends React.Component {
   // static navigationOptions = {
   //   tabBarOptions: {
   //     activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
