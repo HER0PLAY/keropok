@@ -50,8 +50,8 @@ export default class Library extends React.Component {
         height: 50,
       },
     },
-    tabBarIcon: ({tintColor}) => (
-      <Image style={{ tintColor: tintColor, height: '83%', width:'15%' }}
+    tabBarIcon: ({ tintColor }) => (
+      <Image style={{ tintColor: tintColor, height: '83%', width: '15%' }}
         source={require('../assets/images/audio-inactive.imageset/audio-inactive.png')} />
     )
   };
@@ -246,11 +246,11 @@ const styles = StyleSheet.create({
     borderColor: '#EBEBEB',
     borderWidth: 1.5,
     alignSelf: 'center',
-    marginHorizontal: 3
+    marginHorizontal: 3 
   },
   TagTxt: {
     marginHorizontal: 10,
-    paddingVertical: 4,
+    paddingVertical: 2,
     color: Config.Constant.COLOR_BACKGROUND_AD,
     fontSize: Utils.MethodUtils.increaseSize(18),
     fontFamily: Config.Constant.FONT_AVE_MEDIUM,

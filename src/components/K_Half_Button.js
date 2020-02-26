@@ -10,7 +10,7 @@ import Utils from "../utils/index"
 
 export default class MCButton extends React.Component {
     render() {
-        const width = this.props.btnWidth !== undefined ? this.props.btnWidth : '100%'
+        const width = this.props.btnWidth !== undefined ? this.props.btnWidth : '48%'
         const color = this.props.btnColor ? this.props.btnColor : Config.Constant.COLOR_BACKGROUND
         const shadow = this.props.shadow ? this.props.shadow : Config.Constant.COLOR_SHADOW
         const btnTextColor = this.props.btnTextColor ? this.props.btnTextColor : Config.Constant.COLOR_BTN_TEXT
@@ -20,11 +20,11 @@ export default class MCButton extends React.Component {
         return (
             <TouchableOpacity
                 activeOpacity={0.9}
-                // onPress={() => this.props.onPress()}
+                 onPress={() => this.props.onPress()}
                 style= {[styles.container, {
                     padding: btnTextPadding,
                     height: Utils.MethodUtils.increaseSize(55),
-                    width: '48%',
+                    width: width,
                     backgroundColor: color,
                     shadowColor: shadow,
                     }, this.props.style]}>

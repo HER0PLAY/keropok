@@ -3,9 +3,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomePage from '../screens/Homescreen';
 import Libraryscreen from '../screens/Libraryscreen';
+
+import StackNavigator from './StackNavigator'
   
 const TabNavigator = createBottomTabNavigator({
-  Home: HomePage,
+  Home: StackNavigator,
   Library: Libraryscreen,
 });
 

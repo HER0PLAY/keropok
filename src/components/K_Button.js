@@ -20,7 +20,6 @@ export default class KButton extends React.Component {
         return (
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => this.props.onPress()}
                 style={[styles.container, {
                     padding: btnTextPadding,
                     height: Utils.MethodUtils.increaseSize(55),
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.9,
+        shadowOpacity: 2,
         shadowRadius: 9,
         elevation: 4,
     },

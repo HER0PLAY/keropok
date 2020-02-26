@@ -1,9 +1,18 @@
 import * as React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-// import { NavigationContainer } from '@react-navigation/native';
 import { createAppContainer } from 'react-navigation';
 import WebView from "../components/WebView/index"
 import TabNavigator from "./TabNavigator"
+import KW_About_Keropok from "../components/WebView/KW_About_Keropok"
+import Homescreen from "../screens/Homescreen"
+
+import {Image } from 'react-native';
+
+import Utils from "../utils/index"
+import Config from "../config/index"
+
+const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
+
 
 // function TabNav() {
 //     return (
@@ -31,10 +40,10 @@ import TabNavigator from "./TabNavigator"
 // }
 
 
-class TabNav extends React.Component {
+class Home extends React.Component {
     render() {
         return (
-            <TabNavigator />
+            <Homescreen props={this.props}/>
         );
     }
 }
@@ -64,14 +73,14 @@ class Terms extends React.Component {
 
 const RootStack = createStackNavigator(
     {
-        TabNavigator: TabNav,
+        Homescreen: Home,
         AboutKeropok: About,
         FAQs: FAQ,
         TermsofService: Terms,
     },
     { headerMode: 'none' },
     {
-        initialRouteName: 'TabNavigator',
+        initialRouteName: Home,
     }
 );
 
@@ -91,6 +100,22 @@ const RootStack = createStackNavigator(
 const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
+    static navigationOptions = {
+        tabBarOptions: {
+          activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
+          inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
+          labelStyle: {
+            fontSize: 13,
+          },
+          tabStyle: {
+            height: 50,
+          },
+        },
+        tabBarIcon: ({ tintColor }) => (
+          <Image style={{ tintColor: tintColor, height: 25, width: 25 }}
+            source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
+        )
+      };
     render() {
         return <AppContainer />;
     }
