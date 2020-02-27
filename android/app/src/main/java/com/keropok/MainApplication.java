@@ -8,6 +8,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.guichaguri.trackplayer.TrackPlayer;
+import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
             new TrackPlayer();
             new SplashScreenReactPackage();
+            new AndroidOpenSettingsPackage();
           return packages;
         }
 

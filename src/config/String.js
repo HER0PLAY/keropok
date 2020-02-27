@@ -7,6 +7,7 @@ export default {
     ABOUT: "About Keropok",
     FAQ: "FAQ",
     TEARMS: "Terms of Services",
+    ENABLE_KEYBOARD: "Enable Keyboard",
 
     SEARCH: "Search for audio bites",
 }

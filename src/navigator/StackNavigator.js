@@ -2,8 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import WebView from "../components/WebView/index"
-import TabNavigator from "./TabNavigator"
-import KW_About_Keropok from "../components/WebView/KW_About_Keropok"
+import FullScrView from '../components/FullScrView/index'
 import Homescreen from "../screens/Homescreen"
 
 import { Image } from 'react-native';
@@ -57,14 +56,21 @@ class About extends React.Component {
 class FAQ extends React.Component {
     render() {
         return (
-            <WebView.KW_FAQ />
+            <WebView.KW_FAQ props={this.props} />
         );
     }
 }
 class Terms extends React.Component {
     render() {
         return (
-            <WebView.KW_Terms_of_Service />
+            <WebView.KW_Terms_of_Service props={this.props}/>
+        );
+    }
+}
+class installKey extends React.Component {
+    render() {
+        return (
+            <FullScrView.installKeyboard props={this.props}/>
         );
     }
 }
@@ -77,8 +83,9 @@ const RootStack = createStackNavigator(
         AboutKeropok: About,
         FAQs: FAQ,
         TermsofService: Terms,
+        installKeyboard: installKey,
     },
-    { headerMode: 'none' },
+    { headerMode: 'none', },
     {
         initialRouteName: Home,
     },
@@ -122,6 +129,7 @@ export default class App extends React.Component {
     static navigationOptions = {
         tabBarOptions: {
             tabBarVisible: false,
+            borderTopColor: 'transparent',
             activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
             inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
             labelStyle: {
@@ -130,11 +138,13 @@ export default class App extends React.Component {
             tabStyle: {
                 height: 50,
             },
+            
         },
         tabBarIcon: ({ tintColor }) => (
             <Image style={{ tintColor: tintColor, height: 25, width: 25 }}
                 source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
-        )
+        ),
+        borderTopColor: 'transparent',
     };
     render() {
         return <AppContainer />;

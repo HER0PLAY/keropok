@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Button, StatusBar, StyleSheet, Image } from 'react-native';
+import { View, Text, Button, StatusBar, StyleSheet, Image, Linking, Share } from 'react-native';
 
 import Utils from "../utils/index"
 import Config from "../config/index"
 import Component from "../components/index"
 
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
+
 
 
 export default class Homescreen extends React.Component {
@@ -25,6 +26,28 @@ export default class Homescreen extends React.Component {
   //       source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
   //   )
   // };
+
+  onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          `Hey! Try Keropok, the audio emojis you've always hoped for! Don't say bojio! https://play.google.com/store/apps/details?id=com.keropok `,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   render() {
     return (
       <View style={styles.MainView}>
@@ -49,6 +72,7 @@ export default class Homescreen extends React.Component {
           btnWidth={'100%'}
           btnTextPadding={Utils.MethodUtils.increaseSize(12)}
           btnTextSize={Utils.MethodUtils.increaseSize(17)}
+          onPress={() => { this.props.props.navigation.navigate('installKeyboard') }}
           style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
         />
 
@@ -57,8 +81,8 @@ export default class Homescreen extends React.Component {
           btnWidth={'100%'}
           btnTextPadding={Utils.MethodUtils.increaseSize(12)}
           btnTextSize={Utils.MethodUtils.increaseSize(17)}
+          onPress={this.onShare}
           style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
-          onPress={() => this.props.navigation.navigate("TabNavigator")}
         />
 
         <Component.K_Button
@@ -66,6 +90,8 @@ export default class Homescreen extends React.Component {
           btnWidth={'100%'}
           btnTextPadding={Utils.MethodUtils.increaseSize(12)}
           btnTextSize={Utils.MethodUtils.increaseSize(17)}
+          onPress={() => Linking.openURL('mailto:keropok.bites@gmail.com?subject=Keropok Application Support&body= ')}
+          title="keropok.bites@gmail.com"
           style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
         />
 
@@ -74,11 +100,9 @@ export default class Homescreen extends React.Component {
             btnText={Config.String.ABOUT}
             btnTextPadding={Utils.MethodUtils.increaseSize(12)}
             btnTextSize={Utils.MethodUtils.increaseSize(17)}
-            onPress={() =>
-              { //alert('sdd')
-                this.props.props.navigation.navigate('AboutKeropok')
-              }
-            }
+            onPress={() => { //alert('sdd')
+              this.props.props.navigation.navigate('AboutKeropok')
+            }}
             style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
           />
 
@@ -86,6 +110,7 @@ export default class Homescreen extends React.Component {
             btnText={Config.String.FAQ}
             btnTextPadding={Utils.MethodUtils.increaseSize(12)}
             btnTextSize={Utils.MethodUtils.increaseSize(17)}
+            onPress={() => { this.props.props.navigation.navigate('FAQs') }}
             style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
           />
         </View>
@@ -95,6 +120,7 @@ export default class Homescreen extends React.Component {
           btnWidth={'100%'}
           btnTextPadding={Utils.MethodUtils.increaseSize(12)}
           btnTextSize={Utils.MethodUtils.increaseSize(17)}
+          onPress={() => { this.props.props.navigation.navigate('TermsofService') }}
           style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
         />
 

@@ -22,6 +22,7 @@ export default class KButton extends React.Component {
            // <View style= {{paddingVertical: 10}}>
             <TouchableOpacity
                 activeOpacity={0.9}
+                onPress={() => this.props.onPress()}
                 style={[styles.container, {
                     padding: btnTextPadding,
                     height: Utils.MethodUtils.increaseSize(55),

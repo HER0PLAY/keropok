@@ -9,38 +9,35 @@ import Config from "../../config/index"
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
 
 export default class KW_About_Keropok extends React.Component {
+  // constructor(props) {
+  //   super(props)
+  // }
+  // componentDidMount() {
+  //   // SplashScreen.hide();
+  //   fetch('https://dev.3rddigital.com/keropok/api/cms', {
+  //     method: 'POST',
+  //     headers: {
+  //       type: '2',
+  //     },
 
-  constructor(props) {
-    super(props)
-  }
-  componentDidMount() {
-    // SplashScreen.hide();
-    fetch('https://dev.3rddigital.com/keropok/api/cms', {
-      method: 'POST',
-      headers: {
-        type: '2',
-      },
+  //   }).then(response => response.json())
+  //     .then(responseJson => {
+  //       this.setState(
+  //         {
+  //           isLoading: false,
+  //           dataSource: responseJson.data,
+  //         },
+  //         function () { }
+  //       );
 
-    }).then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            dataSource: responseJson.data,
-          },
-          function () { }
-        );
-
-        // alert(JSON.stringify(responseJson))
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
+  //       // alert(JSON.stringify(responseJson))
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }
   render() {
-    const htmlContent = "<p>I am keropok, a crunchy, tasty snack.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Everybody loves me, if you don&#39;t love me, you probably haven&#39;t tried me yet.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Good things must share with family and friends. I will say hi to them for you.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thank you!</p>";
-
+    const htmlContent = '<p>I am keropok, a crunchy, tasty snack.</p><p>Everybody loves me, if you don&#39;t love me, you probably haven&#39;t tried me yet.</p><p>Good things must share with family and friends. I will say hi to them for you.</p>\<p>Thank you!</p>';
     return (
       <View style={styles.mainView}>
 
@@ -63,14 +60,16 @@ export default class KW_About_Keropok extends React.Component {
           </Text>
         </View>
 
-        <WebView style={styles.webView}
+        {/* <WebView style={styles.webView}
           source={{ uri: 'https://reactnative.dev/' }}
-          style={{ marginTop: 20 }} />
-
-        {/* <HTMLView
+          style={{ marginTop: 20 }} /> */}
+          
+        <ScrollView >
+        <HTMLView
           value={htmlContent}
-          stylesheet={styles.webView}
-        /> */}
+          style={styles.htmlView}
+        />
+        </ScrollView>
 
         <View style={styles.footer}>
           <Text style={styles.footerTXT}>
@@ -117,13 +116,9 @@ const styles = StyleSheet.create({
     color: Config.Constant.COLOR_RED400,
     fontFamily: Config.Constant.FONT_AVE_HEAVY
   },
-  webView: {
-    height: '80%',
-    width: '100%',
-    backgroundColor: '#F1F',
-    fontSize: 15,
-    color: "#000",
-    fontWeight: '100',
+  htmlView: {
+    backgroundColor: "#999",
+    paddingHorizontal: '1%',
   },
   footer: {
     height: '5%',
