@@ -184,6 +184,7 @@ dependencies {
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-track-player')
     implementation project(':react-native-android-open-settings')
+    implementation project(':react-native-iap')
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

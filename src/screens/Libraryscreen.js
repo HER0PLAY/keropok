@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StatusBar, TouchableOpacity, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
 
+
 import Utils from "../utils/index"
 import Config from "../config/index"
 import Component from "../components/index"
@@ -51,7 +52,7 @@ export default class Library extends React.Component {
       },
     },
     tabBarIcon: ({ tintColor }) => (
-      <Image style={{ tintColor: tintColor, height: '83%', width: '15%' }}
+      <Image style={{ tintColor: tintColor, height: 25, width: 31 }}
         source={require('../assets/images/audio-inactive.imageset/audio-inactive.png')} />
     )
   };
@@ -65,7 +66,7 @@ export default class Library extends React.Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
 
         <View style={styles.sBarView}>
-          <Component.K_searchbar
+          <Component.K_touchSearchBar
             sBarPlaceHColor={Config.String.SEARCH}
           />
         </View>

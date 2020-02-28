@@ -67,10 +67,24 @@ class Terms extends React.Component {
         );
     }
 }
+class PrivacyPoli extends React.Component {
+    render() {
+        return (
+            <WebView.KW_Privacy_Policy props={this.props}/>
+        );
+    }
+}
 class installKey extends React.Component {
     render() {
         return (
             <FullScrView.installKeyboard props={this.props}/>
+        );
+    }
+}
+class Subscribe extends React.Component {
+    render() {
+        return (
+            <FullScrView.SubscribeToKeropok props={this.props}/>
         );
     }
 }
@@ -83,7 +97,9 @@ const RootStack = createStackNavigator(
         AboutKeropok: About,
         FAQs: FAQ,
         TermsofService: Terms,
+        Privacy_Policy: PrivacyPoli,
         installKeyboard: installKey,
+        SubscribeToKeropok: Subscribe,
     },
     { headerMode: 'none', },
     {
@@ -133,15 +149,15 @@ export default class App extends React.Component {
             activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
             inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
             labelStyle: {
-                fontSize: 13,
+                fontSize: Utils.MethodUtils.increaseSize(13),
             },
             tabStyle: {
-                height: 50,
+                height: Utils.MethodUtils.increaseSize(50),
             },
             
         },
         tabBarIcon: ({ tintColor }) => (
-            <Image style={{ tintColor: tintColor, height: 25, width: 25 }}
+            <Image style={{ tintColor: tintColor, height: Utils.MethodUtils.increaseSize(25), width: Utils.MethodUtils.increaseSize(25), }}
                 source={require('../assets/images/home-Inactive.imageset/home-Inactive.png')} />
         ),
         borderTopColor: 'transparent',

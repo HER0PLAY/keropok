@@ -64,6 +64,7 @@ export default class Homescreen extends React.Component {
           btnWidth={"100%"}
           btnTextPadding={Utils.MethodUtils.increaseSize(12)}
           btnTextSize={Utils.MethodUtils.increaseSize(17)}
+          onPress={() => { this.props.props.navigation.navigate('SubscribeToKeropok') }}
           style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
         />
 
@@ -143,8 +144,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   Logo: {
-    width: 100,
-    height: 100
+    width: Utils.MethodUtils.increaseSize(100),
+    height: Utils.MethodUtils.increaseSize(100),
   },
   no: {
     height: "9%",

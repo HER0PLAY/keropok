@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: Config.Constant.COLOR_RED400,
     },
     titleTXT: {
-        fontSize: 26,
+        fontSize: Utils.MethodUtils.increaseSize(26),
         color: Config.Constant.COLOR_TEXT_AD,
         fontFamily: Config.Constant.FONT_AVE_HEAVY
     },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         backgroundColor: Config.Constant.COLOR_RED400,
     },
     settLocTXT: {
-        fontSize: 16,
+        fontSize: Utils.MethodUtils.increaseSize(16),
         textAlign: 'center',
         color: Config.Constant.COLOR_TEXT_AD,
         fontFamily: Config.Constant.FONT_AVE_MEDIUM
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     SSImg: {
-        height: 350,
-        width: 287,
+        height: Utils.MethodUtils.increaseSize(350),
+        width: Utils.MethodUtils.increaseSize(287),
     },
     EnableKey:{
         height: '15%',

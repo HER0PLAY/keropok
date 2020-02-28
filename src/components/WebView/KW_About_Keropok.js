@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   footerTXT: {
-    fontSize: 18,
+    fontSize: Utils.MethodUtils.increaseSize(18),
     color: Config.Constant.COLOR_BLACK,
     fontFamily: Config.Constant.FONT_AVE_LIGHT
   },

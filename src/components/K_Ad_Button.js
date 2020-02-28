@@ -19,7 +19,7 @@ export default class MCButton extends React.Component {
         return (
             <TouchableOpacity
                 activeOpacity={0.9}
-                // onPress={() => this.props.onPress()}
+                onPress={() => this.props.onPress()}
                 style= {[styles.container, {
                     padding: btnTextPadding,
                     height:  Utils.MethodUtils.increaseSize(55),
