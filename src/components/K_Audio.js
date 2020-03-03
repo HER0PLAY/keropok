@@ -63,8 +63,8 @@ export default class Audio extends React.Component {
                     </TouchableOpacity>
                 </View>
 
-                {/* <FlatList
-                    renderItem={({ item, index }) => ( */}
+                <FlatList
+                    renderItem={({ item, index }) => (
 
                         <View style={styles.Song}>
                             <View style={styles.SongTitle}>
@@ -82,8 +82,8 @@ export default class Audio extends React.Component {
                             </View>
                         </View>
 
-                     {/* )}
-                 /> */}
+                      )}
+                 /> 
 
                 <View style={styles.Share}>
                     <TouchableOpacity

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import FullScrView from "../components/FullScrView/index"
@@ -17,11 +18,19 @@ class Library extends React.Component {
         );
     }
 }
+class seaView extends React.Component {
+    render() {
+        return (
+            <FullScrView.searchView props={this.props}/>
+        );
+    }
+}
 
 
-const RootStack = createStackNavigator(
+const LibStack = createStackNavigator(
     {
         Libraryscreen: Library,
+        searchView: seaView,
     },
     { headerMode: 'none', },
     {
@@ -30,9 +39,9 @@ const RootStack = createStackNavigator(
 
 );
 
-const AppContainer = createAppContainer(RootStack);
+const AppContainer = createAppContainer(LibStack);
 
-export default class App extends React.Component {
+export default class S extends React.Component {
     // static navigationOptions = {
     //     tabBarOptions: {
     //         tabBarVisible: false,
@@ -45,7 +54,7 @@ export default class App extends React.Component {
     //         tabStyle: {
     //             height: Utils.MethodUtils.increaseSize(50),
     //         },
-            
+
     //     },
     //     tabBarIcon: ({ tintColor }) => (
     //         <Image style={{ tintColor: tintColor, height: Utils.MethodUtils.increaseSize(25), width: Utils.MethodUtils.increaseSize(25), }}
@@ -53,6 +62,24 @@ export default class App extends React.Component {
     //     ),
     //     borderTopColor: 'transparent',
     // };
+
+    static navigationOptions = {
+        tabBarOptions: {
+            activeTintColor: Config.Constant.COLOR_BACKGROUND_AD,
+            inactiveTintColor: Config.Constant.COLOR_INACTIVE_TINTCOLOR,
+            labelStyle: {
+                fontSize: Utils.MethodUtils.increaseSize(13),
+            },
+            tabStyle: {
+                height: Utils.MethodUtils.increaseSize(50),
+            },
+        },
+        tabBarIcon: ({ tintColor }) => (
+            <Image style={{ tintColor: tintColor, height: 25, width: 31 }}
+                source={require('../assets/images/audio-inactive.imageset/audio-inactive.png')} />
+        )
+    };
+
     render() {
         return <AppContainer />;
     }

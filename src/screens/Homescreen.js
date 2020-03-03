@@ -8,7 +8,6 @@ import Component from "../components/index"
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
 
 
-
 export default class Homescreen extends React.Component {
   // static navigationOptions = {
   //   tabBarOptions: {
@@ -125,6 +124,12 @@ export default class Homescreen extends React.Component {
           style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
         />
 
+        <View style={styles.footer}>
+          <Text style={styles.footerTXT}>
+            © 2020 Keropok
+          </Text>
+        </View>
+
         {/* <Text style={{ fontSize: 20, textAlign: 'center', margin: '25%', fontWeight: 'bold', color: 'black' }}> Welcome   </Text>
         <Text style={{ fontSize: 20, textAlign: 'center', color: 'green' }}> Login Sucessful   </Text> */}
       </View>
@@ -148,12 +153,23 @@ const styles = StyleSheet.create({
     height: Utils.MethodUtils.increaseSize(100),
   },
   no: {
-    height: "9%",
+    height: "2%",
   },
   Split: {
     flexDirection: "row",
     justifyContent: 'center',
     justifyContent: 'space-between',
     // backgroundColor:'#d6d5d5'
-  }
+  },
+  footer: {
+    height: '5%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    backgroundColor: '#FFFFFF',
+  },
+  footerTXT: {
+    fontSize: Utils.MethodUtils.increaseSize(13),
+    color: Config.Constant.COLOR_BLACK,
+    fontFamily: Config.Constant.FONT_AVE_LIGHT
+  },
 })

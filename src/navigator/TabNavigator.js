@@ -4,10 +4,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Libraryscreen from '../screens/Libraryscreen';
 
 import StackNavigator from './StackNavigator'
+import StackNavLib from './StackNavLib'
   
 const TabNavigator = createBottomTabNavigator({
   Home: StackNavigator,
-  Library: Libraryscreen,
+  Library: StackNavLib,
 });
 
 

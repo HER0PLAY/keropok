@@ -154,7 +154,6 @@ export default class App extends React.Component {
             tabStyle: {
                 height: Utils.MethodUtils.increaseSize(50),
             },
-            
         },
         tabBarIcon: ({ tintColor }) => (
             <Image style={{ tintColor: tintColor, height: Utils.MethodUtils.increaseSize(25), width: Utils.MethodUtils.increaseSize(25), }}

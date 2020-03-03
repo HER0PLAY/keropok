@@ -32,7 +32,6 @@ export default class Library extends React.Component {
           },
           function () { }
         );
-
         // alert(JSON.stringify(responseJson))
       })
       .catch(error => {
@@ -68,6 +67,7 @@ export default class Library extends React.Component {
         <View style={styles.sBarView}>
           <Component.K_touchSearchBar
             sBarPlaceHColor={Config.String.SEARCH}
+            onPress={() => { this.props.props.navigation.navigate('searchView') }}
           />
         </View>
 
@@ -199,16 +199,17 @@ export default class Library extends React.Component {
           </ScrollView>
         </View>
         <Text style={styles.TitlePopular}> Popular Bites</Text>
-        <Component.K_Audio />
+        {/* <Component.K_Audio /> */}
 
 
-        {/* <View>
+        <View>
           <FlatList
             renderItem={({ item, index }) => (
-             <Component.K_Audio />
+              // <Text style={{fontSize: 15, color:'#000'}}>{item.title}</Text>
+              <Component.K_Audio />
             )}
           />
-        </View> */}
+        </View>
 
 
         <Text style={styles.TitleAll}> All Bites</Text>

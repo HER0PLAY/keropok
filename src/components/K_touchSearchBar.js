@@ -9,13 +9,14 @@ export default class KSearchbar extends React.Component {
         return (
             <View style={styles.sBarView}>
 
-                <TouchableOpacity style={styles.searchImgView}>
+                <TouchableOpacity style={styles.searchImgView} onPress={() => this.props.onPress()}>
                     <Image style={styles.searchImg} source={require("../assets/images/Search.imageset/Search.png")} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     activeOpacity={0.9}
-                    style={styles.sBarInput}>
+                    style={styles.sBarInput}
+                    onPress={() => this.props.onPress()}>
                     <Text style={styles.sBarTXT}>{Config.String.SEARCH}</Text>
                 </TouchableOpacity>
 
