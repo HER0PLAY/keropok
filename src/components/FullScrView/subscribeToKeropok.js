@@ -64,11 +64,15 @@ export default class KW_About_Keropok extends React.Component {
                     </Text>
                 </View>
 
+                <View style={{paddingBottom: '2%'}} />
+
                 <View style={styles.settLoc}>
                     <Text style={styles.settLocTXT}>
                         The ads very annoying is it? Paiseh ah, I got no butt to sell, this is the only way i can survive.
                     </Text>
                 </View>
+
+                <View style={{paddingBottom: '2%'}} />
 
                 <View style={styles.settLoc}>
                     <Text style={styles.settLocTXT}>
@@ -76,15 +80,17 @@ export default class KW_About_Keropok extends React.Component {
                     </Text>
                 </View>
 
-                <View style={styles.EnableKey}>
+              
                     <Component.K_Ad_Button
                         btnText={Config.String.SUBSCRIBE}
+                        btnWidth={"80%"}
+                        btnHeight= {"7%"}
                         btnTextPadding={Utils.MethodUtils.increaseSize(12)}
                         btnTextSize={Utils.MethodUtils.increaseSize(17)}
+                        style={{  marginTop: Utils.MethodUtils.increaseSize(15) }}
                         onPress={() => alert('Keropok is ₹120.00/month')}
                        // onPress={ this.requestPurchase(product.productId)}
                     />
-                </View>
 
                 <View style={styles.settLoc}>
                     <Text style={styles.settLocTXT}>

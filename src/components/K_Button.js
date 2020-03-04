@@ -11,24 +11,27 @@ import Utils from "../utils/index"
 
 export default class KButton extends React.Component {
     render() {
-        const width = this.props.btnWidth !== undefined ? this.props.btnWidth : '100%'
+        const height = this.props.btnHeight !== undefined ? this.props.btnHeight : '8%'
+        const width = this.props.btnWidth !== undefined ? this.props.btnWidth : '90%'
         const color = this.props.btnColor ? this.props.btnColor : Config.Constant.COLOR_BACKGROUND
         const shadow = this.props.shadow ? this.props.shadow : Config.Constant.COLOR_SHADOW
         const btnTextColor = this.props.btnTextColor ? this.props.btnTextColor : Config.Constant.COLOR_BTN_TEXT
         const btnTextSize = this.props.btnTextSize ? this.props.btnTextSize : Utils.MethodUtils.increaseSize(20)
-        const btnTextPadding = this.props.btnTextPadding ? this.props.btnTextPadding : Utils.MethodUtils.increaseSize(8)
+        const btnTextPadding = this.props.btnTextPadding ? this.props.btnTextPadding : Utils.MethodUtils.increaseSize(0)
 
         return (
            // <View style= {{paddingVertical: 10}}>
             <TouchableOpacity
-                activeOpacity={0.9}
+                activeOpacity={0.95}
                 onPress={() => this.props.onPress()}
                 style={[styles.container, {
                     padding: btnTextPadding,
-                    height: Utils.MethodUtils.increaseSize(55),
-                    width: '100%',
+                    height: height,
+                    width: width,
                     backgroundColor: color,
                     shadowColor: shadow,
+                    alignSelf: 'center',
+                    justifyContent: 'center',
                 }, this.props.style]}>
 
                 <Text style={{

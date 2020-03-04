@@ -15,7 +15,7 @@ export default class MCButton extends React.Component {
         const shadow = this.props.shadow ? this.props.shadow : Config.Constant.COLOR_SHADOW
         const btnTextColor = this.props.btnTextColor ? this.props.btnTextColor : Config.Constant.COLOR_BTN_TEXT
         const btnTextSize = this.props.btnTextSize ? this.props.btnTextSize : Utils.MethodUtils.increaseSize(20)
-        const btnTextPadding = this.props.btnTextPadding ? this.props.btnTextPadding : Utils.MethodUtils.increaseSize(8)
+        const btnTextPadding = this.props.btnTextPadding ? this.props.btnTextPadding : Utils.MethodUtils.increaseSize(0)
 
         return (
             <TouchableOpacity
@@ -23,7 +23,7 @@ export default class MCButton extends React.Component {
                  onPress={() => this.props.onPress()}
                 style= {[styles.container, {
                     padding: btnTextPadding,
-                    height: Utils.MethodUtils.increaseSize(55),
+                    height: '100%',
                     width: width,
                     backgroundColor: color,
                     shadowColor: shadow,

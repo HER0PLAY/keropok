@@ -45,17 +45,15 @@ export default class KW_About_Keropok extends React.Component {
                         source={ /* Platform === 'android' ? */ require("../../assets/images/InstallKeyboard.imageset/InstallKeyboard_android2.png")
                                     /* : require("../../assets/images/InstallKeyboard.imageset/InstallKeyboard_ios2.png") */ } />
                 </View>
-
-                <View style={styles.EnableKey}>
+                <View style={{paddingBottom: '4%'}} />
                     <Component.K_Button
                         btnText={Config.String.ENABLE_KEYBOARD}
-                        //btnWidth={"100%"}
-                        btnTextPadding={Utils.MethodUtils.increaseSize(12)}
-                        btnTextSize={Utils.MethodUtils.increaseSize(17)}
-                        //style={{ marginTop: Utils.MethodUtils.increaseSize(15) }}
+                        btnWidth={"80%"}
+                        btnHeight= {"7%"}
+                        btnTextSize={Utils.MethodUtils.increaseSize(16)}
+                        style={{  marginTop: Utils.MethodUtils.increaseSize(15) }}
                         onPress={() =>AndroidOpenSettings.inputMethodSettings()}
                     />
-                </View>
 
             </View>
         )
@@ -111,17 +109,11 @@ const styles = StyleSheet.create({
         fontFamily: Config.Constant.FONT_AVE_MEDIUM
     },
     SSview: {
-        height: '50%',
         justifyContent: 'flex-start',
         alignSelf: 'center',
     },
     SSImg: {
-        height: Utils.MethodUtils.increaseSize(350),
-        width: Utils.MethodUtils.increaseSize(287),
-    },
-    EnableKey:{
-        height: '15%',
-        width: '80%',
-        alignSelf: 'center',
+        height: Utils.MethodUtils.increaseSize(280),
+        width: Utils.MethodUtils.increaseSize(230),
     },
 })
