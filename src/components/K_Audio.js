@@ -83,7 +83,7 @@ export default class Audio extends React.Component {
                         </View>
 
                       )}
-                 /> 
+                 />
 
                 <View style={styles.Share}>
                     <TouchableOpacity

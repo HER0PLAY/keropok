@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         paddingTop: '1%',
     },
     sBarView: {
-        height: '9%',
+        height: '8%',
         width: '100%',
         flexDirection: 'row',
         backgroundColor: "#ffffff",

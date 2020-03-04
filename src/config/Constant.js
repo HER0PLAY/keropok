@@ -14,6 +14,7 @@ export default Constant = {
     COLOR_SBAR_TXT: "#BEBEBE",
     COLOR_SBAR_CLEAR : "#CCCCCC",
     COLOR_SONG_TXT: "#585858",
+    COLOR_TAG_BORDER: "#EBEBEB",
 
     SCREEN_WIDTH: Dimensions.get('window').width,
     SCREEN_HEIGHT: Dimensions.get('window').height,
