@@ -15,7 +15,7 @@ export default class Audio extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://dev.3rddigital.com/keropok/api/audio', {
+        fetch('https://dev.3rddigital.com/keropok/api/popular_audio', {
             method: 'POST',
             headers: {
                 AuthorizationUser: 'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
@@ -113,9 +113,9 @@ export default class Audio extends React.Component {
 
 const styles = StyleSheet.create({
     component: {
-        height: '9%',
+        height: 70,
         width: '90%',
-        backgroundColor: '#fff',
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
         alignSelf: 'center',
         flexDirection: 'row',
         borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,

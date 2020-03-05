@@ -3,6 +3,7 @@ import K_touchSearchBar from "./K_touchSearchBar"
 import K_Ad_Button from "./K_Ad_Button"
 import K_Half_Button from "./K_Half_Button"
 import K_Audio from "./K_Audio"
+import K_AudioCategory from "./K_AudioCategory"
 
 export default {
     K_Button,
@@ -10,4 +11,5 @@ export default {
     K_Ad_Button,
     K_Half_Button,
     K_Audio,
+    K_AudioCategory
 }

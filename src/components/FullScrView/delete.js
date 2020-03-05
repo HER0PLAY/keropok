@@ -1,77 +1,32 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, TextInput, View, Image } from 'react-native';
+renderTextandInputs = (obje) => {
 
-import Config from "../../config/index"
-import Utils from "../../utils/index"
+    var keyvalue_to_json = JSON.parse(obje.keyValues);
+    var textinputName = [];
+    var foundTextFields = [];
+    for (let i = 0; i < keyvalue_to_json.inputFields.length; i++) {
+        if (keyvalue_to_json.inputFields[i].type === 'textfield') {
+            foundTextFields.push(<TextInput onChangeText={(text) => this.postToBmp({ text })} style={{ borderWidth: 1 }}>{keyvalue_to_json.inputFields[i].placeholderText}</TextInput>) &&
+                textinputName.push(<Text>{keyvalue_to_json.inputFields[i].title}</Text>)
+        }
+    }
 
-export default class KSearchbar extends React.Component {
-    render() {
-        return (
-            <View style={styles.mainView}>
-                <View style={styles.sBarView}>
-
-                    <TouchableOpacity style={styles.searchImgView}>
-                        <Image source={require("../../assets/images/Search.imageset/Search.png")} />
-                    </TouchableOpacity>
-
-                    <TextInput
-                        activeOpacity={0.9}
-                        placeholder={Config.String.SEARCH}
-                        placeholderTextColor={Config.Constant.COLOR_SBAR_TXT}
-                        //onChangeText={text => this.setState({ password: text })}
-                        style={styles.sBarInput}
-                    />
-
-                    <TouchableOpacity style={styles.searchImgView}>
-                        <Image style={styles.searchImg} source={require("../../assets/images/ic-clear.imageset/icon.png")} />
-                    </TouchableOpacity>
-
+    return (
+        <View>
+            <ListItem
+                title={obje.name}
+                subtitle={obje.description}
+                onPress={() => this.postToBmp(obje)}
+            />
+            <View >
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ flex: 1 }}>
+                        {textinputName}
+                    </View>
+                    <View style={{ flex: 1 }}>
+                        {foundTextFields}
+                    </View>
                 </View>
             </View>
-        )
-    }
+        </View>
+    )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        borderRadius: Utils.MethodUtils.isTablet() ? 10 : 5,
-    },
-    mainView: {
-        height: '100%',
-        width: "100%",
-        backgroundColor: '#FFFFFF',
-        justifyContent: 'center',
-    },
-    sBarView: {
-        flex: 1,
-        height: '8%',
-        width: '100%',
-        flexDirection: 'row',
-        backgroundColor: "#ffffff",
-        borderRadius: 11,
-        borderStyle: 'solid',
-        borderColor: '#EBEBEB',
-        borderWidth: 2.5,
-        justifyContent: 'space-evenly'
-    },
-    sBarInput: {
-        flex: 1,
-        backgroundColor: "#ffffff",
-        fontSize: Utils.MethodUtils.increaseSize(17),
-        fontFamily: Config.Constant.FONT_AVE_HEAVY,
-        color: Config.Constant.COLOR_SHADOW
-    },
-    searchImgView: {
-        height: '100%',
-        width: '10%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 9,
-    },
-    searchImg: {
-        tintColor: Config.Constant.COLOR_SBAR_CLEAR,
-        width: 22,
-        height: 22,
-    },
-})
-
