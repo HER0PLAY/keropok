@@ -69,19 +69,29 @@ export default class Library extends React.Component {
         <View style={styles.sBarView}>
           <Component.K_touchSearchBar
             sBarPlaceHColor={Config.String.SEARCH}
-            onPress={() => { this.props.props.navigation.navigate('searchView') }}/>
+            onPress={() => { this.props.props.navigation.navigate('searchView') }} />
         </View>
 
         <View style={styles.TagViewHeight}>
           <Component.K_AudioCategory />
         </View>
 
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.MainTagView}>
         <Text style={styles.TitlePopular}> Popular Bites</Text>
 
-        <View style={styles.PopularList}>
-          <Component.K_Audio/>
+        <View style={styles.PopularViewList}>
+          <Component.K_AudioPopular />
         </View>
+
         <Text style={styles.TitleAll}> All Bites</Text>
+
+        <View style={styles.PopularViewList}>
+          <Component.K_Audio />
+        </View>
+        </ScrollView>
+
       </View>
     );
   }
@@ -140,7 +150,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
   },
-  PopularList: {
+  PopularViewList: {
     width: '100%',
   },
 })

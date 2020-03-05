@@ -4,7 +4,7 @@ import TrackPlayer from 'react-native-track-player';
 import Config from "../config/index"
 import Utils from "../utils/index"
 TrackPlayer.setupPlayer().then(() => { });
-export default class Audio extends React.Component {
+export default class AudioPopular extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ export default class Audio extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://dev.3rddigital.com/keropok/api/audio', {
+        fetch('https://dev.3rddigital.com/keropok/api/popular_audio', {
             method: 'POST',
             headers: {
                 AuthorizationUser: 'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
@@ -41,7 +41,7 @@ export default class Audio extends React.Component {
             <FlatList
                 style={styles.PopularList}
                 data={this.state.dataSource}
-                keyExtractor={({ audio_id }) => audio_id}
+                keyExtractor={({audio_id}) => audio_id}
                 renderItem={({ item }) =>
                     <View style={styles.component}>
                         <View style={styles.Play}>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         marginVertical: '2%'
     },
-    PopularList: {
+    PopularList:{
         backgroundColor: Config.Constant.COLOR_BACKGROUND,
     },
     Play: {

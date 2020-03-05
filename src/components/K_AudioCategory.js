@@ -38,7 +38,7 @@ export default class AudioCategory extends React.Component {
             )
         }
         return (
-            <View style={{ flex: 1, padding: 20 }}>
+            <View style={styles.MainView}>
                 <FlatList
                     horizontal={true}
                     data={this.state.dataSource}
@@ -50,6 +50,7 @@ export default class AudioCategory extends React.Component {
                         </TouchableOpacity>
                     </View>}
                     style={styles.MainTagView}
+                    keyExtractor={({audio_id}) => audio_id}
                 />
             </View>
         )
@@ -57,8 +58,12 @@ export default class AudioCategory extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    MainView: {
+        flex: 1,
+        alignItems: 'center'
+    },
     MainTagView: {
-      backgroundColor: Config.Constant.COLOR_BACKGROUND,
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
     },
     Tags: {
         backgroundColor: Config.Constant.COLOR_BACKGROUND,
