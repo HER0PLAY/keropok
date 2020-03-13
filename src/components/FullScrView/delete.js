@@ -1,32 +1,36 @@
-renderTextandInputs = (obje) => {
+import { Platform } from 'react-native';
+import Share from 'react-native-share';
 
-    var keyvalue_to_json = JSON.parse(obje.keyValues);
-    var textinputName = [];
-    var foundTextFields = [];
-    for (let i = 0; i < keyvalue_to_json.inputFields.length; i++) {
-        if (keyvalue_to_json.inputFields[i].type === 'textfield') {
-            foundTextFields.push(<TextInput onChangeText={(text) => this.postToBmp({ text })} style={{ borderWidth: 1 }}>{keyvalue_to_json.inputFields[i].placeholderText}</TextInput>) &&
-                textinputName.push(<Text>{keyvalue_to_json.inputFields[i].title}</Text>)
-        }
-    }
+const url = 'https://awesome.contents.com/';
+const title = 'Awesome Contents';
+const message = 'Please check this out.';
+const options = Platform.select({
+  ios: {
+    activityItemSources: [
+      {
+        placeholderItem: { type: 'url', content: url },
+        item: {
+          default: { type: 'url', content: url },
+        },
+        subject: {
+          default: title,
+        },
+        linkMetadata: { originalUrl: url, url, title },
+      },
+      {
+        placeholderItem: { type: 'text', content: message },
+        item: {
+          default: { type: 'text', content: message },
+          message: null, // Specify no text to share via Messages app.
+        },
+      },
+    ],
+  },
+  default: {
+    title,
+    subject: title,
+    message: `${message} ${url}`,
+  },
+});
 
-    return (
-        <View>
-            <ListItem
-                title={obje.name}
-                subtitle={obje.description}
-                onPress={() => this.postToBmp(obje)}
-            />
-            <View >
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ flex: 1 }}>
-                        {textinputName}
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        {foundTextFields}
-                    </View>
-                </View>
-            </View>
-        </View>
-    )
-}
+Share.open(options);

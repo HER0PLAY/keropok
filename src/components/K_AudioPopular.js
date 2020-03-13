@@ -1,9 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text, StatusBar, Image, TouchableOpacity, ActivityIndicator, PixelRatio, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, Image, TouchableNativeFeedback, Share, ActivityIndicator, PixelRatio, Dimensions, FlatList } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import Config from "../config/index"
 import Utils from "../utils/index"
 TrackPlayer.setupPlayer().then(() => { });
+
+// var track = {
+//     uri: URI
+// }
+
 export default class AudioPopular extends React.Component {
 
     constructor(props) {
@@ -28,7 +33,55 @@ export default class AudioPopular extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
+
+        this.onTrackChange = TrackPlayer.addEventListener('playback-track-changed', async (data) => {
+
+            const track = await TrackPlayer.getTrack(data.nextTrack);
+            this.setState({ trackTitle: track.title });
+        });
     }
+
+    onShare = async (URL) => {
+        try {
+            const result = await Share.share({
+                message: URL,
+                // url: "https://reactnative.dev/img/tiny_logo.png",
+            });
+
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    handlePlaySound = async (URL) => {
+        try {
+            let source = URL
+            // let source = require('./assets/note1.wav')
+            await soundObject.loadAsync(source)
+            await soundObject
+                .playAsync()
+                .then(async playbackStatus => {
+                    setTimeout(() => {
+                        soundObject.unloadAsync()
+                    }, playbackStatus.playableDurationMillis)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     render() {
         if (this.state.isLoading) {
             return (
@@ -41,29 +94,29 @@ export default class AudioPopular extends React.Component {
             <FlatList
                 style={styles.PopularList}
                 data={this.state.dataSource}
-                keyExtractor={({audio_id}) => audio_id}
+                keyExtractor={({ audio_id }) => audio_id}
                 renderItem={({ item }) =>
                     <View style={styles.component}>
+
                         <View style={styles.Play}>
-                            <TouchableOpacity
-                                style={styles.playView}
-                            // onPress={() => {
-                            //     debugger
-                            //     this.setState({ showPassword: !this.state.showPassword });
-                            // }}
-                            >
-                                <Image
-                                    style={styles.playIMG}
-                                    resizeMode='contain'
-                                    source={
-                                        // this.state.showPassword ? (
-                                        require('../assets/images/play.imageset/play.png')
-                                        // ) : (
-                                        //         require('../assets/images/Pause.imageset/Pause.png')
-                                        //     )
-                                    }
-                                />
-                            </TouchableOpacity>
+                            <TouchableNativeFeedback
+                                onPress={() => this.state(track)}
+                                //onPress={() => this.handlePlaySound(item.file)}
+                                background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}>
+
+                                <View style={styles.playView}>
+                                    <Image
+                                        style={styles.playIMG}
+                                        resizeMode='contain'
+                                        source={
+                                            // this.state.TrackPlayer.play() ? (
+                                            require('../assets/images/play.imageset/play.png')
+                                            // ) : (
+                                            //         require('../assets/images/Pause.imageset/Pause.png')
+                                            //     )
+                                        } />
+                                </View>
+                            </TouchableNativeFeedback>
                         </View>
 
                         <View style={styles.Song}>
@@ -83,26 +136,23 @@ export default class AudioPopular extends React.Component {
                         </View>
 
                         <View style={styles.Share}>
-                            <TouchableOpacity
+                            <TouchableNativeFeedback
                                 style={styles.ShareView}
-                            // onPress={() => {
-                            //     debugger
-                            //     this.setState({ showPassword: !this.state.showPassword });
-                            // }}
+                                background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}
+                                onPress={() => this.onShare(item.file)}
                             >
-                                <Image
-                                    style={styles.ShareIMG}
-                                    resizeMode='contain'
-                                    source={
-                                        // this.state.showPassword ? (
-                                        require('../assets/images/Share.imageset/Share.png')
-                                        // ) : (
-                                        //         require('../assets/images/Pause.imageset/Pause.png')
-                                        //     )
-                                    }
-                                />
-                            </TouchableOpacity>
+
+                                <View style={styles.playView}>
+                                    <Image
+                                        style={styles.ShareIMG}
+                                        resizeMode='contain'
+                                        source={
+                                            require('../assets/images/Share.imageset/Share.png')
+                                        } />
+                                </View>
+                            </TouchableNativeFeedback>
                         </View>
+
                     </View>
                 } />
         )
@@ -117,26 +167,38 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row',
         borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
-        elevation: 10,
+        elevation: 7,
         justifyContent: "space-evenly",
-        marginVertical: '2%'
+        marginBottom: '3%',
+        marginTop: '1%'
     },
-    PopularList:{
+    PopularList: {
         backgroundColor: Config.Constant.COLOR_BACKGROUND,
     },
     Play: {
-        width: '10%',
-        height: '100%',
-        paddingBottom: '10%',
-        alignItems: 'center',
+        width: '15%',
+        height: '83%',
+        alignSelf: 'flex-start',
         justifyContent: "center",
         borderTopLeftRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
         borderBottomLeftRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
     },
+    playView: {
+        alignSelf: 'center',
+        borderRadius: 100,
+        width: '60%',
+        height: '60%',
+    },
+    playIMG: {
+        alignSelf: 'center',
+        height: '100%',
+        width: 20,
+        tintColor: Config.Constant.COLOR_RED400
+    },
     Song: {
-        width: '80%',
+        width: '70%',
         height: '80%',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         flexDirection: 'column',
         justifyContent: 'flex-start',
     },
@@ -165,28 +227,18 @@ const styles = StyleSheet.create({
         fontSize: Utils.MethodUtils.increaseSize(14),
     },
     Share: {
-        height: '100%',
-        width: '10%',
+        height: '83%',
+        width: '15%',
         justifyContent: "center",
         alignItems: 'center',
         borderBottomRightRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
         borderTopRightRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
     },
-    playView: {
-        alignSelf: 'flex-end',
-        borderBottomRightRadius: 4,
-        borderTopRightRadius: 4,
-    },
-    playIMG: {
-        alignSelf: 'center',
-        height: '100%',
-        width: 20,
-        tintColor: Config.Constant.COLOR_RED400
-    },
     ShareView: {
-        alignSelf: 'flex-start',
-        borderBottomRightRadius: 4,
-        borderTopRightRadius: 4,
+        alignSelf: 'center',
+        borderRadius: 100,
+        width: '60%',
+        height: '60%',
     },
     ShareIMG: {
         alignSelf: 'center',

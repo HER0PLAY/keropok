@@ -15,21 +15,21 @@ const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ?
 export default class KW_About_Keropok extends React.Component {
     render() {
 
-        requestPurchase = async (sku= string) => {
-            try {
-              await RNIap.requestPurchase(sku, false);
-            } catch (err) {
-              console.warn(err.code, err.message);
-            }
-          }
+        // requestPurchase = async (sku= string) => {
+        //     try {
+        //       await RNIap.requestPurchase(sku, false);
+        //     } catch (err) {
+        //       console.warn(err.code, err.message);
+        //     }
+        //   }
          
-          requestSubscription = async (sku= string) => {
-            try {
-              await RNIap.requestSubscription(sku);
-            } catch (err) {
-              console.warn(err.code, err.message);
-            }
-          }
+        //   requestSubscription = async (sku= string) => {
+        //     try {
+        //       await RNIap.requestSubscription(sku);
+        //     } catch (err) {
+        //       console.warn(err.code, err.message);
+        //     }
+        //   }
         return (
             <View style={styles.mainView}>
 
@@ -38,7 +38,7 @@ export default class KW_About_Keropok extends React.Component {
                 <View style={styles.closeBTNview}>
                     <TouchableNativeFeedback
                         style={styles.closeTouchableFeedback}
-                        background={TouchableNativeFeedback.Ripple('#b1b1b1', true)}
+                        background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}
                         onPress={() => this.props.props.navigation.pop()}>
 
                         <View style={styles.closeTouchable}>

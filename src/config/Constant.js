@@ -15,6 +15,7 @@ export default Constant = {
     COLOR_SBAR_CLEAR : "#CCCCCC",
     COLOR_SONG_TXT: "#585858",
     COLOR_TAG_BORDER: "#EBEBEB",
+    COLOR_TOUCHABLENATIVEFEEDBACK: "#B1B1B1",
 
     SCREEN_WIDTH: Dimensions.get('window').width,
     SCREEN_HEIGHT: Dimensions.get('window').height,

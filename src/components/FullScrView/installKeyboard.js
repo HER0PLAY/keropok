@@ -18,7 +18,7 @@ export default class KW_About_Keropok extends React.Component {
                 <View style={styles.closeBTNview}>
                     <TouchableNativeFeedback
                         style={styles.closeTouchableFeedback}
-                        background={TouchableNativeFeedback.Ripple('#b1b1b1', true)}
+                        background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}
                         onPress={() => this.props.props.navigation.pop()}
                     >
                         <View style={styles.closeTouchable}>

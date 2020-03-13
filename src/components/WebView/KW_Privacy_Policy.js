@@ -18,7 +18,7 @@ export default class KW_Privacy_Policy extends React.Component {
         <View style={styles.closeBTNview}>
           <TouchableNativeFeedback
             style={styles.closeTouchableFeedback}
-            background={TouchableNativeFeedback.Ripple('#b1b1b1', true)}
+            background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}
             onPress={() => this.props.props.navigation.pop()}
           >
             <View style={styles.closeTouchable}>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   mainView: {
     height: '100%',
     width: "100%",
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Config.Constant.COLOR_BACKGROUND,
     justifyContent: 'center',
     paddingHorizontal: '2%'
   },
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end',
     paddingEnd: '2%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Config.Constant.COLOR_BACKGROUND,
   },
   closeTouchable: {
     height: '70%',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     height: '4%',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Config.Constant.COLOR_BACKGROUND,
   },
   titleTXT: {
     fontSize: 25,
@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
     fontFamily: Config.Constant.FONT_AVE_HEAVY
   },
   htmlView: {
-    backgroundColor: "#999",
+    backgroundColor: Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK,
     paddingHorizontal: '1%',
   },
   footer: {
     height: '5%',
     justifyContent: 'flex-end',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Config.Constant.COLOR_BACKGROUND,
   },
   footerTXT: {
     fontSize: 18,

@@ -2,7 +2,8 @@ package com.keropok;
 
 import android.app.Application;
 import android.content.Context;
-
+import cl.json.RNSharePackage;
+import cl.json.ShareApplication;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
             new SplashScreenReactPackage();
             new AndroidOpenSettingsPackage();
             new RNIapPackage();
+            new RNSharePackage();
           return packages;
         }
 

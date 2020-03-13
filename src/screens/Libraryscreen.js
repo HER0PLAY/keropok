@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StatusBar, TouchableOpacity, StyleSheet, Image, ScrollView, FlatList, ListView } from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+import { View, Text, Button, StatusBar, StyleSheet, Image, ScrollView, RefreshControl, FlatList, ListView } from 'react-native';
 
 import Utils from "../utils/index"
 import Config from "../config/index"
@@ -12,36 +11,14 @@ export default class Library extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { isFetching: false }
   }
 
-  componentDidMount() {
-    fetch('https://dev.3rddigital.com/keropok/api/audio', {
-      method: 'POST',
-      headers: {
-        type: 'eyJpdiI6Iml5aW5UYk9oZzRYcFJ1NkxEZFloTkE9PSIsInZhbHVlIjoiSnFLb3pRdURERjJaOGhUQUgzMklKcU1HaFNjZmlFWXJzbGtHbTE1VnBnQ0lxU1lyVUo3NVpGZndJQjR2THhEVCIsIm1hYyI6ImM4YzVlNWU2M2U3MDM5YmMyYjdkZTdlMjY3ZTMyNTczMjVhYTc4N2RhZWFlNDQ3ZjJiZjhkOTQ4MDk4Y2I4YzgifQ==',
-      },
-      // body: JSON.stringify({
-      //   "audio": this.state.title,
-      //   "duration": this.state.duration,
-      //   "file": this.state.data,
-      // })
-    }).then(response => response.json())
-      .then(responseJson => {
-        this.setState(
-          {
-            isLoading: false,
-            dataSource: responseJson.data,
-          },
-          function () {
-            data = responseJson
-          }
-        );
-        //alert(JSON.stringify(responseJson))
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  onRefresh() {
+    this.setState({ isFetching: true },  ()=> { this.dataSource() });
+    this.setState({ isFetching: true },  ()=> { this.dataSource() });
   }
+
 
   static navigationOptions = {
     tabBarOptions: {
@@ -77,19 +54,26 @@ export default class Library extends React.Component {
         </View>
 
         <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.MainTagView}>
-        <Text style={styles.TitlePopular}> Popular Bites</Text>
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refresh}
+              onRefresh={() => this.onRefresh()}
+              tintColor="red"
+            />
+          }
+          showsVerticalScrollIndicator={false}
+          style={styles.MainTagView}>
+          <Text style={styles.TitlePopular}> Popular Bites</Text>
 
-        <View style={styles.PopularViewList}>
-          <Component.K_AudioPopular />
-        </View>
+          <View style={styles.PopularViewList}>
+            <Component.K_AudioPopular />
+          </View>
 
-        <Text style={styles.TitleAll}> All Bites</Text>
+          <Text style={styles.TitleAll}> All Bites</Text>
 
-        <View style={styles.PopularViewList}>
-          <Component.K_Audio />
-        </View>
+          <View style={styles.PopularViewList}>
+            <Component.K_Audio />
+          </View>
         </ScrollView>
 
       </View>

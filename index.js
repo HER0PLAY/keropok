@@ -1,8 +1,3 @@
-/**
- * @format
- */
-
-import SplashScreen from 'react-native-splash-screen'
 import TrackPlayer from 'react-native-track-player';
 import {AppRegistry} from 'react-native';
 import App from './App';
