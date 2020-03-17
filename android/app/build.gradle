@@ -133,6 +133,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -186,6 +187,10 @@ dependencies {
     implementation project(':react-native-android-open-settings')
     implementation project(':react-native-iap')
     implementation project(':react-native-share')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-file-share')
+    implementation project(':react-native-uuid-generator')
+    //implementation 'com.android.support:multidex:1.0.3'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

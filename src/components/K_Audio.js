@@ -1,7 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, StatusBar, Share, Image, TouchableNativeFeedback, ActivityIndicator, PixelRatio, Dimensions, FlatList } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
-import AudioBTN from './AudioBTN/index'
+import RNFS from 'react-native-fs';
+import RNFileShare from 'react-native-file-share'
+import RNFetchBlob from 'react-native-fetch-blob'
+import SoundPlayer from 'react-native-sound-player'
 import Config from "../config/index"
 import Utils from "../utils/index"
 TrackPlayer.setupPlayer().then(() => { });
@@ -9,7 +12,9 @@ export default class Audio extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { isLoading: true }
+        this.state = { isLoading: true };
+        this.state = { isDone: false, };
+        this.onDownloadAudioPress = this.onDownloadAudioPress.bind(this);
     }
 
     componentDidMount() {
@@ -38,25 +43,52 @@ export default class Audio extends React.Component {
     }
 
     onShare = async (URL) => {
+
+        RNFS.downloadFile({
+            fromUrl: URL,
+            toFile: `${RNFS.DocumentDirectoryPath}/demo.mp3`,
+        }).promise.then((r) => {
+            this.setState({ isDone: true })
+        });
+
         try {
             const result = await Share.share({
-                message: URL,
-                // url: "https://reactnative.dev/img/tiny_logo.png",
+                //message: URL,
+                //title: `hello`,
+                //url: "https://reactnative.dev/img/tiny_logo.png",
             });
-
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
-                    // shared with activity type of result.activityType
                 } else {
-                    // shared
                 }
             } else if (result.action === Share.dismissedAction) {
-                // dismissed
             }
         } catch (error) {
             alert(error.message);
         }
     };
+
+    onDownloadAudioPress = async (file, audio) => {
+
+        RNFS.downloadFile({
+            fromUrl: file,
+            toFile: `${RNFS.DocumentDirectoryPath}/j.mp3`,
+        }).promise.then((r) => {
+            this.setState({ isDone: true })
+        });
+
+        try {
+            //  this.state.playSoundFile() ? (
+              SoundPlayer.playSoundFile('j', 'mp3')
+            // ) : ( 
+            //     SoundPlayer.pauseSoundFile('j', 'mp3')
+            // )
+            //SoundPlayer.playUrl(toFile)
+        } catch (e) {
+            console.log(`cannot play the sound file`, e)
+        }
+
+    }
 
     handlePlaySound = async (URL) => {
         try {
@@ -96,7 +128,8 @@ export default class Audio extends React.Component {
 
                         <View style={styles.Play}>
                             <TouchableNativeFeedback
-                                onPress={() => this.handlePlaySound(item.file)}
+                                //onPress={() => this.handlePlaySound(item.file)}
+                                onPress={() => this.onDownloadAudioPress(item.file, item.audio)}
                                 background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}>
 
                                 <View style={styles.playView}>
@@ -104,7 +137,7 @@ export default class Audio extends React.Component {
                                         style={styles.playIMG}
                                         resizeMode='contain'
                                         source={
-                                            // this.state.showPassword ? (
+                                            // this.state.pauseSoundFile ? (
                                             require('../assets/images/play.imageset/play.png')
                                             // ) : (
                                             //         require('../assets/images/Pause.imageset/Pause.png')

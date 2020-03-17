@@ -4,6 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
+import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
+
+import com.reactlibrary.RNFileSharePackage;
+import com.rnfs.RNFSPackage;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -37,6 +41,9 @@ public class MainApplication extends Application implements ReactApplication {
             new AndroidOpenSettingsPackage();
             new RNIapPackage();
             new RNSharePackage();
+            new RNFSPackage();
+            new RNFileSharePackage();
+            new RNUUIDGeneratorPackage();
           return packages;
         }
 

@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, Text, StatusBar, Image, TouchableNativeFeedback, Share, ActivityIndicator, PixelRatio, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, Image, AppRegistry, TouchableNativeFeedback, Share, ActivityIndicator, PixelRatio, Dimensions, FlatList, NativeModules, NativeEventEmitter, Platform } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
+import RNFS from 'react-native-fs';
+import SoundPlayer from 'react-native-sound-player'
 import Config from "../config/index"
 import Utils from "../utils/index"
 TrackPlayer.setupPlayer().then(() => { });
-
-// var track = {
-//     uri: URI
-// }
 
 export default class AudioPopular extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { isLoading: true }
+        this.state = { isDone: false, };
+        this.onDownloadAudioPress = this.onDownloadAudioPress.bind(this);
     }
 
     componentDidMount() {
@@ -39,46 +39,92 @@ export default class AudioPopular extends React.Component {
             const track = await TrackPlayer.getTrack(data.nextTrack);
             this.setState({ trackTitle: track.title });
         });
+
+        // _onFinishedPlayingSubscription = SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
+        //     console.log('finished playing', success)
+        //   })
+        //   _onFinishedLoadingSubscription = SoundPlayer.addEventListener('FinishedLoading', ({ success }) => {
+        //     console.log('finished loading', success)
+        //   })
+        //   _onFinishedLoadingURLSubscription = SoundPlayer.addEventListener('FinishedLoadingURL', ({ success, url }) => {
+        //     console.log('finished loading url', success, url)
+        //   })
     }
 
+    // componentWillUnmount() {
+    //     _onFinishedPlayingSubscription.remove()
+    //     _onFinishedLoadingSubscription.remove()
+    //     _onFinishedLoadingURLSubscription.remove()
+    //   }
+
     onShare = async (URL) => {
+
+        RNFS.downloadFile({
+            fromUrl: URL,
+            toFile: `${RNFS.DocumentDirectoryPath}/Share.mp3`,
+        }).promise.then((r) => {
+            this.setState({ isDone: true })
+        });
+
         try {
             const result = await Share.share({
-                message: URL,
-                // url: "https://reactnative.dev/img/tiny_logo.png",
+                message: toFile,
+                // url: Share.mp3,
             });
-
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
-                    // shared with activity type of result.activityType
                 } else {
-                    // shared
                 }
             } else if (result.action === Share.dismissedAction) {
-                // dismissed
             }
         } catch (error) {
             alert(error.message);
         }
     };
 
-    handlePlaySound = async (URL) => {
+    // handlePlaySound = async (URL) => {
+    //     try {
+    //         let source = URL
+    //         // let source = require('./assets/note1.wav')
+    //         await soundObject.loadAsync(source)
+    //         await soundObject
+    //             .playAsync()
+    //             .then(async playbackStatus => {
+    //                 setTimeout(() => {
+    //                     soundObject.unloadAsync()
+    //                 }, playbackStatus.playableDurationMillis)
+    //             })
+    //             .catch(error => {
+    //                 console.log(error)
+    //             })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
+    onDownloadAudioPress = async (file, audio) => {
+
+        RNFS.downloadFile({
+            fromUrl: file,
+            toFile: `${RNFS.DocumentDirectoryPath}/j.mp3`,
+        }).promise.then((r) => {
+            this.setState({ isDone: true })
+        });
+
         try {
-            let source = URL
-            // let source = require('./assets/note1.wav')
-            await soundObject.loadAsync(source)
-            await soundObject
-                .playAsync()
-                .then(async playbackStatus => {
-                    setTimeout(() => {
-                        soundObject.unloadAsync()
-                    }, playbackStatus.playableDurationMillis)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        } catch (error) {
-            console.log(error)
+            SoundPlayer.playSoundFile('j', 'mp3')
+            //SoundPlayer.playUrl(toFile)
+        } catch (e) {
+            console.log(`cannot play the sound file`, e)
+        }
+    }
+
+    handlePlaySound = async (s) => {
+        try {
+            alert(s)
+            SoundPlayer.playUrl(s)
+        } catch (e) {
+            console.log(`cannot play the sound file`, e)
         }
     }
 
@@ -100,8 +146,9 @@ export default class AudioPopular extends React.Component {
 
                         <View style={styles.Play}>
                             <TouchableNativeFeedback
-                                onPress={() => this.state(track)}
-                                //onPress={() => this.handlePlaySound(item.file)}
+                                // onPress={() => this.state(track)}
+                                onPress={() => this.onDownloadAudioPress(item.file, item.audio)}
+                                //onPress={() => this.onShare(item.file)}
                                 background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}>
 
                                 <View style={styles.playView}>
