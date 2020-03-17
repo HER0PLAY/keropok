@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Text, StatusBar, Image, AppRegistry, TouchableNativeFeedback, Share, ActivityIndicator, PixelRatio, Dimensions, FlatList, NativeModules, NativeEventEmitter, Platform } from 'react-native';
+import { StyleSheet, View, Text, Share, StatusBar, Image, AppRegistry, TouchableNativeFeedback, ActivityIndicator, PixelRatio, Dimensions, FlatList, NativeModules, NativeEventEmitter, Platform } from 'react-native';
+//import Share from 'react-native-share';
 import TrackPlayer from 'react-native-track-player';
 import RNFS from 'react-native-fs';
 import SoundPlayer from 'react-native-sound-player'
@@ -59,16 +60,18 @@ export default class AudioPopular extends React.Component {
 
     onShare = async (URL) => {
 
+        var path = `${RNFS.DocumentDirectoryPath}/Share.mp3`
+
         RNFS.downloadFile({
             fromUrl: URL,
-            toFile: `${RNFS.DocumentDirectoryPath}/Share.mp3`,
+            toFile: path,
         }).promise.then((r) => {
             this.setState({ isDone: true })
         });
 
         try {
             const result = await Share.share({
-                message: toFile,
+                message: path,
                 // url: Share.mp3,
             });
             if (result.action === Share.sharedAction) {

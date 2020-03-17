@@ -2,8 +2,10 @@ import React from 'react';
 import { StyleSheet, View, Text, StatusBar, Share, Image, TouchableNativeFeedback, ActivityIndicator, PixelRatio, Dimensions, FlatList } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import RNFS from 'react-native-fs';
+//import Share from 'react-native-share'
 import RNFileShare from 'react-native-file-share'
 import RNFetchBlob from 'react-native-fetch-blob'
+import UUIDGenerator from 'react-native-uuid-generator';
 import SoundPlayer from 'react-native-sound-player'
 import Config from "../config/index"
 import Utils from "../utils/index"
@@ -43,18 +45,21 @@ export default class Audio extends React.Component {
     }
 
     onShare = async (URL) => {
+        
+        var path = `${RNFS.DocumentDirectoryPath}/Demo.mp3`
+
+        // RNFileShare.shareFiles(path);
 
         RNFS.downloadFile({
             fromUrl: URL,
-            toFile: `${RNFS.DocumentDirectoryPath}/demo.mp3`,
+            toFile: path,
         }).promise.then((r) => {
             this.setState({ isDone: true })
         });
 
         try {
             const result = await Share.share({
-                //message: URL,
-                //title: `hello`,
+                message: path,
                 //url: "https://reactnative.dev/img/tiny_logo.png",
             });
             if (result.action === Share.sharedAction) {
@@ -70,16 +75,18 @@ export default class Audio extends React.Component {
 
     onDownloadAudioPress = async (file, audio) => {
 
+        var path = `${RNFS.DocumentDirectoryPath}/demo.mp3`
+
         RNFS.downloadFile({
             fromUrl: file,
-            toFile: `${RNFS.DocumentDirectoryPath}/j.mp3`,
+            toFile: path,
         }).promise.then((r) => {
             this.setState({ isDone: true })
         });
 
         try {
             //  this.state.playSoundFile() ? (
-              SoundPlayer.playSoundFile('j', 'mp3')
+              SoundPlayer.playSoundFile('demo', 'mp3')
             // ) : ( 
             //     SoundPlayer.pauseSoundFile('j', 'mp3')
             // )

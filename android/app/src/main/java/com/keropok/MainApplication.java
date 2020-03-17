@@ -14,6 +14,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.guichaguri.trackplayer.TrackPlayer;
+import com.thebylito.navigationbarcolor.NavigationBarColorPackage;
 import com.levelasquez.androidopensettings.AndroidOpenSettingsPackage;
 import com.dooboolab.RNIap.RNIapPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -44,6 +45,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFSPackage();
             new RNFileSharePackage();
             new RNUUIDGeneratorPackage();
+            new NavigationBarColorPackage();
           return packages;
         }
 

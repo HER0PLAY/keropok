@@ -1,9 +1,22 @@
 import React from 'react';
-import { View, Text, Button, StatusBar, StyleSheet, Image, ScrollView, RefreshControl, FlatList, ListView } from 'react-native';
+import { View, Text, Button, StatusBar, StyleSheet, NativeModules, Platform, Image, ScrollView, RefreshControl, FlatList, ListView } from 'react-native';
 
 import Utils from "../utils/index"
 import Config from "../config/index"
 import Component from "../components/index"
+
+// const {NavigationBarColor} = NativeModules;
+
+// const changeNavigationBarColor = (
+//   color = String,
+//   light = false,
+//   animated = true,
+// ) => {
+//   if (Platform.OS === 'android') {
+//     const LightNav = light ? true : false;
+//     NavigationBarColor.changeNavigationBarColor(color, LightNav, animated);
+//   }
+// };
 
 const viewWidth = Config.Constant.SCREEN_WIDTH * (Utils.MethodUtils.isTablet() ? 0.65 : 0.85)
 
@@ -19,6 +32,15 @@ export default class Library extends React.Component {
     this.setState({ isFetching: true },  ()=> { this.dataSource() });
   }
 
+  example = async () => {
+    try{
+        const response = await changeNavigationBarColor('#80b3ff');
+        console.log(response)// {success: true}
+    }catch(e){
+        console.log(e)// {success: false}
+    }
+
+};
 
   static navigationOptions = {
     tabBarOptions: {
