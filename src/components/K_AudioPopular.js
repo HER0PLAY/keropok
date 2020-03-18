@@ -1,21 +1,69 @@
-import React from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, Share, StatusBar, Image, AppRegistry, TouchableNativeFeedback, ActivityIndicator, PixelRatio, Dimensions, FlatList, NativeModules, NativeEventEmitter, Platform } from 'react-native';
 //import Share from 'react-native-share';
-import TrackPlayer from 'react-native-track-player';
+// import TrackPlayer from 'react-native-track-player';
 import RNFS from 'react-native-fs';
 import SoundPlayer from 'react-native-sound-player'
 import Config from "../config/index"
 import Utils from "../utils/index"
-TrackPlayer.setupPlayer().then(() => { });
+// TrackPlayer.setupPlayer().then(() => { });
 
-export default class AudioPopular extends React.Component {
+const { RNSoundPlayer } = NativeModules
+
+const _soundPlayerEmitter = new NativeEventEmitter(RNSoundPlayer)
+let _finishedPlayingListener = null
+let _finishedLoadingListener = null
+
+
+
+
+export default class AudioPopular extends Component {
 
     constructor(props) {
         super(props);
         this.state = { isLoading: true }
         this.state = { isDone: false, };
+        this.state = { played: '' };
         this.onDownloadAudioPress = this.onDownloadAudioPress.bind(this);
     }
+
+    playSoundFile = (name = string, type = string) => {
+        RNSoundPlayer.playSoundFile(name, type)
+    }
+    loadSoundFile = (name = string, type = string) => {
+        RNSoundPlayer.loadSoundFile(name, type)
+    }
+    playUrl = async (url = file) => {
+        RNSoundPlayer.playUrl(url)
+    }
+    loadUrl = (url = string) => {
+        RNSoundPlayer.loadUrl(url)
+    }
+
+    onFinishedPlaying = (callback = (success = boolean) => any) => {
+        if (_finishedPlayingListener) {
+            _finishedPlayingListener.remove()
+            _finishedPlayingListener = undefined
+        }
+
+        _finishedPlayingListener = _soundPlayerEmitter.addListener(
+            'FinishedPlaying',
+            callback
+        )
+    }
+
+    onFinishedLoading = (callback = (success = boolean) => any) => {
+        if (_finishedLoadingListener) {
+            _finishedLoadingListener.remove()
+            _finishedLoadingListener = undefined
+        }
+
+        _finishedLoadingListener = _soundPlayerEmitter.addListener(
+            'FinishedLoading',
+            callback
+        )
+    }
+    addEventListener = (eventName = 'FinishedLoading' | 'FinishedPlaying' | 'FinishedLoadingURL' | 'FinishedLoadingFile', callback = Function) => _soundPlayerEmitter.addListener(eventName, callback)
 
     componentDidMount() {
         fetch('https://dev.3rddigital.com/keropok/api/popular_audio', {
@@ -34,22 +82,6 @@ export default class AudioPopular extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
-
-        this.onTrackChange = TrackPlayer.addEventListener('playback-track-changed', async (data) => {
-
-            const track = await TrackPlayer.getTrack(data.nextTrack);
-            this.setState({ trackTitle: track.title });
-        });
-
-        // _onFinishedPlayingSubscription = SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
-        //     console.log('finished playing', success)
-        //   })
-        //   _onFinishedLoadingSubscription = SoundPlayer.addEventListener('FinishedLoading', ({ success }) => {
-        //     console.log('finished loading', success)
-        //   })
-        //   _onFinishedLoadingURLSubscription = SoundPlayer.addEventListener('FinishedLoadingURL', ({ success, url }) => {
-        //     console.log('finished loading url', success, url)
-        //   })
     }
 
     // componentWillUnmount() {
@@ -106,6 +138,7 @@ export default class AudioPopular extends React.Component {
     // }
 
     onDownloadAudioPress = async (file, audio) => {
+        var played = false
 
         RNFS.downloadFile({
             fromUrl: file,
@@ -114,11 +147,20 @@ export default class AudioPopular extends React.Component {
             this.setState({ isDone: true })
         });
 
-        try {
-            SoundPlayer.playSoundFile('j', 'mp3')
-            //SoundPlayer.playUrl(toFile)
-        } catch (e) {
-            console.log(`cannot play the sound file`, e)
+        if (this.state.play) {
+            try {
+                alert(file)
+                SoundPlayer.playSoundFile('j', 'mp3')
+                // SoundPlayer.playUrl(toFile)
+            } catch (e) {
+                console.log(`cannot play the sound file`, e)
+            }
+        } else {
+            try {
+                SoundPlayer.pause()
+            } catch (e) {
+                console.log(`xyz`, e)
+            }
         }
     }
 
@@ -130,7 +172,6 @@ export default class AudioPopular extends React.Component {
             console.log(`cannot play the sound file`, e)
         }
     }
-
     render() {
         if (this.state.isLoading) {
             return (
@@ -139,6 +180,7 @@ export default class AudioPopular extends React.Component {
                 </View>
             )
         }
+            const {played, setPlayed} = useState(true)
         return (
             <FlatList
                 style={styles.PopularList}
@@ -149,22 +191,27 @@ export default class AudioPopular extends React.Component {
 
                         <View style={styles.Play}>
                             <TouchableNativeFeedback
-                                // onPress={() => this.state(track)}
-                                onPress={() => this.onDownloadAudioPress(item.file, item.audio)}
-                                //onPress={() => this.onShare(item.file)}
+                                 onPress={() => this.onDownloadAudioPress(item.file, item.audio),
+                                     this.state({ played: !played })}
+                                //onPress={() => this.playUrl(item.file, item.audio)}
                                 background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}>
 
                                 <View style={styles.playView}>
-                                    <Image
-                                        style={styles.playIMG}
-                                        resizeMode='contain'
-                                        source={
-                                            // this.state.TrackPlayer.play() ? (
-                                            require('../assets/images/play.imageset/play.png')
-                                            // ) : (
-                                            //         require('../assets/images/Pause.imageset/Pause.png')
-                                            //     )
-                                        } />
+                                    {played ? (
+                                        <Image
+                                            style={styles.playIMG}
+                                            resizeMode='contain'
+                                            source={
+                                                require('../assets/images/Pause.imageset/Pause.png')
+                                            } />)
+                                        :
+                                        (<Image
+                                            style={styles.playIMG}
+                                            resizeMode='contain'
+                                            source={
+                                                require('../assets/images/play.imageset/play.png')
+                                            } />)
+                                    }
                                 </View>
                             </TouchableNativeFeedback>
                         </View>
