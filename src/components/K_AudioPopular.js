@@ -66,7 +66,7 @@ export default class AudioPopular extends Component {
 
 
     onDownloadAudioPress = async (file, audio) => {
-        // setPlayed = (!played)
+        setPlayed = (!played)
 
         RNFS.downloadFile({
             fromUrl: file,
