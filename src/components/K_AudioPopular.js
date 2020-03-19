@@ -38,7 +38,7 @@ export default class AudioPopular extends Component {
                 console.error(error);
             });
     }
-    
+
     onShare = async (URL) => {
         var path = `${RNFS.DocumentDirectoryPath}/Share.mp3`
         RNFS.downloadFile({
@@ -76,13 +76,13 @@ export default class AudioPopular extends Component {
         });
 
         if (this.state.play) {
-        try {
-            // alert(file)
-            RNSoundPlayer.playSoundFile('j', 'mp3')
-            // SoundPlayer.playUrl(toFile)
-        } catch (e) {
-            console.log(`cannot play the sound file`, e)
-        }
+            try {
+                // alert(file)
+                RNSoundPlayer.playSoundFile('j', 'mp3')
+                // SoundPlayer.playUrl(toFile)
+            } catch (e) {
+                console.log(`cannot play the sound file`, e)
+            }
         } else {
             try {
                 RNSoundPlayer.pause()
@@ -116,20 +116,21 @@ export default class AudioPopular extends Component {
 
                                 <View style={styles.playView}>
                                     {played ? (
-                                    <Image
-                                        style={styles.playIMG}
-                                        resizeMode='contain'
-                                        source={
-                                            require('../assets/images/Pause.imageset/Pause.png')
-                                        } /> )
-                                        :
+                                        <Image
+                                            style={styles.playIMG}
+                                            resizeMode='contain'
+                                            source={
+                                                require('../assets/images/Pause.imageset/Pause.png')
+                                            } />
+                                    ) :
                                         (<Image
                                             style={styles.playIMG}
                                             resizeMode='contain'
                                             source={
                                                 require('../assets/images/play.imageset/play.png')
-                                            } />)
-                                    } 
+                                            }
+                                        />)
+                                    }
                                 </View>
                             </TouchableNativeFeedback>
                         </View>
