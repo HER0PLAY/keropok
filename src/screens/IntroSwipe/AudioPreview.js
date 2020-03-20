@@ -14,9 +14,11 @@ export default class extends Component {
                 <Swiper style={styles.wrapper}
                     dot={<View style={styles.dot} />}
                     activeDot={<View style={styles.activeDot} />}
-                    paginationStyle={{
-                        bottom: 70
-                    }}
+                    paginationStyle={styles.pagination}
+                    showsButtons={true}
+                    buttonWrapperStyle={styles.buttonWrapper}
+                    nextButton={ <Text style={styles.NextBtnTXT} > Next </Text> }
+                    prevButton={<Text style={styles.prevButton}></Text>}
                     loop={false}>
 
                     <View style={styles.slide}>
@@ -106,6 +108,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         width: "100%",
+        justifyContent: 'flex-end'
     },
     AppTitle: {
         height: '7%',
@@ -117,6 +120,15 @@ const styles = StyleSheet.create({
         fontSize: Utils.MethodUtils.increaseSize(26),
         color: Config.Constant.COLOR_TEXT_AD,
         fontFamily: Config.Constant.FONT_AVE_HEAVY
+    },
+    NextBtnTXT: {
+        fontSize: Utils.MethodUtils.increaseSize(20),
+        color: Config.Constant.COLOR_RED400,
+        fontFamily: Config.Constant.FONT_AVE_HEAVY
+    },
+    prevButton: {
+        height: 0,
+        width: 0
     },
     title: {
         height: '6%',
@@ -153,19 +165,38 @@ const styles = StyleSheet.create({
         // width: Utils.MethodUtils.increaseSize(230),
     },
     dot: {
-        backgroundColor: 'rgba(255,255,255,.3)',
-        width: 13,
-        height: 13,
-        borderRadius: 7,
-        marginLeft: 7,
-        marginRight: 7
-    },
-    activeDot: {
-        backgroundColor: '#fff',
-        width: '3%',
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
+        width: '6%',
         height: '50%',
         borderRadius: 7,
         marginLeft: 7,
         marginRight: 7
     },
+    activeDot: {
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
+        width: '10%',
+        height: '50%',
+        borderRadius: 7,
+    },
+    pagination: {
+        height: '2%',
+        width: '35%',
+        bottom: '8%',
+        left: '10%',
+        justifyContent: 'flex-start',
+        backgroundColor: Config.Constant.COLOR_RED400
+    },
+    buttonWrapper: {
+        flex: 1,
+        width: '30%',
+        height: '5%',
+        shadowRadius: 9,
+        elevation: 4,
+        top: '88%',
+        left: '60%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: Utils.MethodUtils.isTablet() ? 14 : 7,
+        backgroundColor: Config.Constant.COLOR_BACKGROUND,
+    }
 })
