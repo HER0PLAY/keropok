@@ -2,6 +2,7 @@ import React from 'react';
 import SplashScreen from 'react-native-splash-screen'
 
 import TabNavigator from "./src/navigator/TabNavigator"
+import IntroSwipe from "./src/screens/IntroSwipe/AudioPreview"
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -9,7 +10,8 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <TabNavigator />
+      <IntroSwipe/>
+      //<TabNavigator />
     )
   }
 }

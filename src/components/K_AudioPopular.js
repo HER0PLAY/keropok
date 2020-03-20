@@ -66,7 +66,7 @@ export default class AudioPopular extends Component {
 
 
     onDownloadAudioPress = async (file, audio) => {
-        setPlayed = (!played)
+        //setPlayed = (!played)
 
         RNFS.downloadFile({
             fromUrl: file,
@@ -75,21 +75,21 @@ export default class AudioPopular extends Component {
             this.setState({ isDone: true })
         });
 
-        if (this.state.play) {
-            try {
-                // alert(file)
-                RNSoundPlayer.playSoundFile('j', 'mp3')
-                // SoundPlayer.playUrl(toFile)
-            } catch (e) {
-                console.log(`cannot play the sound file`, e)
-            }
-        } else {
-            try {
-                RNSoundPlayer.pause()
-            } catch (e) {
-                console.log(`xyz`, e)
-            }
+        // if (this.state.play) {
+        try {
+            // alert(file)
+            RNSoundPlayer.playSoundFile('j', 'mp3')
+            // SoundPlayer.playUrl(toFile)
+        } catch (e) {
+            console.log(`cannot play the sound file`, e)
         }
+        // } else {
+        //     try {
+        //         RNSoundPlayer.pause()
+        //     } catch (e) {
+        //         console.log(`xyz`, e)
+        //     }
+        // }
     }
 
     render() {
@@ -115,22 +115,22 @@ export default class AudioPopular extends Component {
                                 background={TouchableNativeFeedback.Ripple(Config.Constant.COLOR_TOUCHABLENATIVEFEEDBACK, true)}>
 
                                 <View style={styles.playView}>
-                                    {played ? (
+                                    {/* {played ? (
                                         <Image
                                             style={styles.playIMG}
                                             resizeMode='contain'
                                             source={
                                                 require('../assets/images/Pause.imageset/Pause.png')
                                             } />
-                                    ) :
-                                        (<Image
-                                            style={styles.playIMG}
-                                            resizeMode='contain'
-                                            source={
-                                                require('../assets/images/play.imageset/play.png')
-                                            }
-                                        />)
-                                    }
+                                    ) : ( */}
+                                    <Image
+                                        style={styles.playIMG}
+                                        resizeMode='contain'
+                                        source={
+                                            require('../assets/images/play.imageset/play.png')
+                                        }
+                                    />
+                                    {/*  )} */}
                                 </View>
                             </TouchableNativeFeedback>
                         </View>

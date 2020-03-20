@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import FullScrView from "../components/FullScrView/index"
 import Libraryscreen from "../screens/Libraryscreen"
+import Libraryscr from "../screens/Libraryscr"
 
 import Utils from "../utils/index"
 import Config from "../config/index"
